@@ -1,8 +1,61 @@
-﻿@{
+﻿<!--
+    Molly Gilchrist
+    1/14/2026
+    STG-456
+    Capstone Project
+-->
+
+@{
     ViewData["Title"] = "Connect";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="connect-page">
+    <!-- church info card-->
+    <div class="church-info">
+        <h2>Madison Church</h2>
+        <p>
+            <img src="~/images/location-dot-solid-full.svg" alt="Map Pin" />
+            6202 N 12th St, Phoenix, AZ 85014
+        </p>
+
+        <p>
+            <img src="~/images/church-solid-full.svg" alt="Church" />
+            Sunday Mornings at 10:30am
+        </p>
+        
+        <img src="~/images/phone-solid-full.svg" alt="Phone" />
+        <a href="tel:6022771720">(602) 277-1720</a>
+
+        <a class="map-button" href="https://www.google.com/maps?q=6202+N+12th+St+Phoenix+AZ+85014" target="_blank">
+            Get Directions
+        </a>
+    </div>
+
+    <!-- connect buttons-->
+    <div class="connect-actions">
+        <a class="connect-btn prayer" href="https://dashboard.faithteams.com/forms/xXLED"
+           target="_blank">Prayer Requests</a>
+        <a class="connect-btn new" href="https://dashboard.faithteams.com/forms/Mn5IJ"
+           target="_blank">I'm New</a>
+        <a class="connect-btn steps" href="https://dashboard.faithteams.com/forms/uiVF6"
+           target="_blank">Next Steps</a>
+        <a class="connect-btn website" href="https://madisonphx.org/"
+           target="_blank">Visit Website</a>
+    </div>
+
+    <!-- social links -->
+    <div class="social-links">
+        <a class="social-links-btn facebook" href="https://www.facebook.com/media/set/?vanity=madisonphx.org&set=a.573333544823016"
+           target="_blank">
+           Facebook
+       </a>
+        <a class="social-links-btn youtube" href="https://www.youtube.com/@@madisonchurchphx/featured"
+           target="_blank">
+           YouTube
+       </a>
+        <a class="social-links-btn instagram" href="https://www.instagram.com/madisonchurchphx/"
+           target="_blank">
+           Instagram
+       </a>
+    </div>
 </div>

@@ -72,11 +72,97 @@ body {
 /* SERMONS PAGE STYLING */
 /* SERMONS PAGE STYLING */
 
+
 /* EVENT PAGE STYLING */
 /* EVENT PAGE STYLING */
 
+
 /* CONNECT PAGE STYLING */
+.connect-page > div {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.church-info {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    border-color: #4a6fa5;
+}
+
+.map-button {
+    position: absolute;
+    top: 83%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    padding: 0.5rem 1rem;
+    background-color: #4a6fa5;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.map-button:link,
+.map-button:visited,
+.map-button:hover,
+.map-button:active {
+    color: white;
+    text-decoration: none;
+}
+
+.connect-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+    gap: 1rem;
+}
+
+.connect-actions a.connect-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    background-color: #4267B2;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.social-links-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    background-color: #4267B2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.social-links-btn:link,
+.social-links-btn:visited,
+.social-links-btn:hover,
+.social-links-btn:active {
+    color: white;
+    text-decoration: none;
+}
+
+.church-info img {
+    height: 20px;
+    width: 30px;
+    margin-bottom: 4px;
+}
+
+
 /* CONNECT PAGE STYLING */
+
 
 /* GIVE PAGE STYLING */
 /* GIVE PAGE STYLING */
