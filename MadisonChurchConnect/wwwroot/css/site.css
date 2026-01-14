@@ -33,7 +33,7 @@ body {
 
 /* _LAYOUT PAGE STYLING */
 .top-icon-bar, .bottom-navbar {
-    background-color: #134B67;
+    background-color: #4267B2;
 }
 
 .top-icon-bar {
@@ -79,8 +79,7 @@ body {
 
 /* CONNECT PAGE STYLING */
 .connect-page > div {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .church-info {
@@ -91,15 +90,32 @@ body {
     border-color: #4a6fa5;
 }
 
+a.phone-number {
+    text-decoration: none;
+}
+
 .map-button {
     position: absolute;
     top: 83%;
     right: 0.75rem;
     transform: translateY(-50%);
     padding: 0.5rem 1rem;
-    background-color: #4a6fa5;
+    background-color: #4267B2;
     color: white;
     border-radius: 8px;
+    text-decoration: none;
+}
+
+.church-phone a {
+    text-decoration: none;
+    color: #4267B2;
+}
+
+.church-phone:link,
+.church-phone:visited,
+.church-phone:hover,
+.church-phone:active {
+    color: #4267B2;
     text-decoration: none;
 }
 
@@ -153,6 +169,13 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    position: relative;
+}
+
+.social-links img {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 4px;
 }
 
 .social-links-btn:link,
