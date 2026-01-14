@@ -18,5 +18,43 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 70px;
+    background-color: #FEFEFA;
+}
+
+.top-icon-bar, .bottom-navbar {
+    background-color: #134B67;
+}
+
+.top-icon-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1031;
+}
+
+.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.nav-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #FEFEFA;
+    padding: 5px;
+}
+
+.nav-icon-link img {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 4px;
 }
