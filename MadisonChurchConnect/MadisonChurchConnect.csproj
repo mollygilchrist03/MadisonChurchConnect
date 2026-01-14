@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
     <Folder Include="Services\BusinessLogic\" />
     <Folder Include="Services\DataAccess\" />
     <Folder Include="Services\Mapper\" />
