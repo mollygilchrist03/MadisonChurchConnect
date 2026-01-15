@@ -1,0 +1,20 @@
+﻿{
+  "name": "Madison Church Connect",
+  "short_name": "MadisonConnect",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4267B2",
+  "theme_color": "#4267B2",
+  "icons": [
+    {
+      "src": "/images/m-logo-new-white.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/m-logo-new-white.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
