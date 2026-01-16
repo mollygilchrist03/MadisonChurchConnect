@@ -6,22 +6,22 @@
 */
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -44,19 +44,37 @@ body {
     z-index: 1031;
 }
 
-.top-icon-bar .container-fluid {
-    justify-content: flex-start !important;
-}
+    .top-icon-bar .container-fluid {
+        justify-content: space-between !important;
+    }
 
-.top-icon-bar .navbar-brand {
-    margin-right: 0.5rem;
-}
+    .top-icon-bar .navbar-brand {
+        margin-right: 0.5rem;
+    }
 
 .top-nav-text {
     color: #FEFEFA;
     font-size: 1rem;
     font-weight: 500;
 }
+
+.top-nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.notes-icon-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+    .notes-icon-link img {
+        height: 30px;
+        width: 30px;
+        margin-bottom: 4px;
+        filter: brightness(0) invert(1);
+    }
 
 .bottom-navbar {
     position: fixed;
@@ -75,11 +93,11 @@ body {
     padding: 5px;
 }
 
-.nav-icon-link img {
-    height: 30px;
-    width: 30px;
-    margin-bottom: 4px;
-}
+    .nav-icon-link img {
+        height: 30px;
+        width: 30px;
+        margin-bottom: 4px;
+    }
 /* _LAYOUT PAGE STYLING */
 
 
@@ -148,25 +166,25 @@ a.phone-number {
     gap: 1rem;
 }
 
-.connect-actions a.connect-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 1 / 1;
-    border: 1px solid #ccc;
-    border-color: #4a6fa5;
-    color: black;
-    text-decoration: none;
-    border-radius: 8px;
-    text-align: center;
-}
+    .connect-actions a.connect-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 1 / 1;
+        border: 1px solid #ccc;
+        border-color: #4a6fa5;
+        color: black;
+        text-decoration: none;
+        border-radius: 8px;
+        text-align: center;
+    }
 
-.connect-actions a.connect-btn img {
-    height: 40px;
-    width: 40px;
-    margin-bottom: 0.5rem;
-}
+        .connect-actions a.connect-btn img {
+            height: 40px;
+            width: 40px;
+            margin-bottom: 0.5rem;
+        }
 
 .social-links {
     display: flex;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MadisonChurchConnect.Controllers
 {
-    public class ConnectController : Controller
+    public class NotesController : Controller
     {
         public IActionResult Index()
         {
