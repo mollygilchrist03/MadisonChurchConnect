@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * Molly Gilchrist
+ * 1/15/2026
+ * STG-456
+ * Capstone Project
+ */
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace MadisonChurchConnect.Controllers
 {
@@ -6,7 +13,7 @@ namespace MadisonChurchConnect.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return Redirect("https://madisonphx.faithteams.com/give");
         }
     }
 }
