@@ -44,6 +44,20 @@ body {
     z-index: 1031;
 }
 
+.top-icon-bar .container-fluid {
+    justify-content: flex-start !important;
+}
+
+.top-icon-bar .navbar-brand {
+    margin-right: 0.5rem;
+}
+
+.top-nav-text {
+    color: #FEFEFA;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 .bottom-navbar {
     position: fixed;
     bottom: 0;
