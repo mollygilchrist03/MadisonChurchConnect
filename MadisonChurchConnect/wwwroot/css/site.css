@@ -223,10 +223,115 @@ a.phone-number {
     width: 30px;
     margin-bottom: 4px;
 }
-
-
 /* CONNECT PAGE STYLING */
 
 
 /* GIVE PAGE STYLING */
 /* GIVE PAGE STYLING */
+
+
+/* NOTES PAGE STYLING */
+.notes-page {
+    padding: 1rem 0;
+}
+
+.page-title {
+    margin-bottom: 1.5rem;
+    color: #4267B2;
+    font-weight: 600;
+}
+
+.create-note-section {
+    margin-bottom: 1.5rem;
+}
+
+.create-note-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background-color: #4267B2;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+    .create-note-btn:hover {
+        background-color: #365899;
+    }
+
+.btn-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 0.5rem;
+    filter: brightness(0) invert(1);
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.note-card {
+    padding: 1rem;
+    border: 1px solid #4a6fa5;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.note-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.note-date {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.note-preview {
+    color: #555;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+.note-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.note-link {
+    color: #4267B2;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .note-link:hover {
+        text-decoration: underline;
+    }
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #666;
+}
+
+.empty-icon {
+    height: 80px;
+    width: 80px;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+/* NOTES PAGE STYLING */

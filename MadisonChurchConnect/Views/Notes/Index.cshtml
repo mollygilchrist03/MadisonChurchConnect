@@ -6,8 +6,42 @@
 -->
  
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sermon Notes";
 }
 
-<h1>Index</h1>
+<div class="notes-page">
+    <h2 class="page-title">My Sermon Notes</h2>
 
+    <!-- create new note button -->
+    <div class="create-note-section">
+        <a asp-area="" asp-controller="Notes" asp-action="Create" class="btn btn-primary create-note-btn">
+            <img src="~/images/plus-solid-full.svg" alt="Create" class="btn-icon" />
+            Create New Note
+        </a>
+    </div>
+
+    <!-- notes list -->
+    <div class="notes-list">
+        <!-- example note card -->
+        <div class="note-card">
+            <div class="note-header">
+                <h3 class="note-title">Faith in Action</h3>
+                <span class="note-date">January 12, 2026</span>
+            </div>
+            <p class="note-preview">
+                Main points: Trust in God's timing, serve others with love...
+            </p>
+            <div class="note-actions">
+                <a asp-area="" asp-controller="Notes" asp-action="Details" asp-route-id="1" class="note-link">View</a>
+                <a asp-area="" asp-controller="Notes" asp-action="Edit" asp-route-id="1" class="note-link">Edit</a>
+            </div>
+        </div>
+
+        <!-- empty state if no notes -->
+        <div class="empty-state" style="display: none;">
+            <img src="~/images/file-regular-full.svg" alt="No notes" class="empty-icon" />
+            <p>You haven't created any sermon notes yet.</p>
+            <p>Tap "Create New Note" to get started!</p>
+        </div>
+    </div>
+</div>
