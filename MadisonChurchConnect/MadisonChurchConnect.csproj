@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\BusinessLogic\" />
-    <Folder Include="Services\DataAccess\" />
-    <Folder Include="Services\Mapper\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.22" />
   </ItemGroup>
 
