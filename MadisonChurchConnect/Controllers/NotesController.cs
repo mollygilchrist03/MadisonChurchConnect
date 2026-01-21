@@ -40,12 +40,12 @@ namespace MadisonChurchConnect.Controllers
         /// <summary>
         /// displays a specific note
         /// </summary>
-        /// <param name="noteId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult Details(int noteId)
+        public IActionResult Details(int id)
         {
             // get the note by its id from business logic
-            NoteViewModel note = _noteLogic.GetNoteById(noteId);
+            NoteViewModel note = _noteLogic.GetNoteById(id);
 
             // check if note is null
             if (note == null)
@@ -100,12 +100,12 @@ namespace MadisonChurchConnect.Controllers
         /// <summary>
         /// display the edit form
         /// </summary>
-        /// <param name="noteId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public IActionResult Edit(int noteId)
+        public IActionResult Edit(int id)
         {
             // get the note by id from business logic
-            NoteViewModel note = _noteLogic.GetNoteById(noteId);
+            NoteViewModel note = _noteLogic.GetNoteById(id);
 
             // check if note is null
             if (note == null)
@@ -120,14 +120,14 @@ namespace MadisonChurchConnect.Controllers
         /// <summary>
         /// handles the edit form submission
         /// </summary>
-        /// <param name="noteId"></param>
+        /// <param name="id"></param>
         /// <param name="updatedNote"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(int noteId, NoteViewModel updatedNote)
+        public IActionResult Edit(int id, NoteViewModel updatedNote)
         {
             // check if the id matches
-            if (noteId != updatedNote.NoteId)
+            if (id != updatedNote.NoteId)
             {
                 return NotFound();
             }
