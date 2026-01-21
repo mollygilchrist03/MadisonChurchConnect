@@ -5,9 +5,32 @@
  * Capstone Project
  */
 
+using System.ComponentModel.DataAnnotations;
+
 namespace MadisonChurchConnect.Models.ViewModels
 {
     public class NoteViewModel
     {
+        // class level properties
+        [Required]
+        public string NoteTitle { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime NoteDate { get; set; }
+
+        [Required]
+        public string NoteContent { get; set; }
+        public string NotePreview { get; set; }
+
+        /// <summary>
+        /// default constructor for ntoe view model
+        /// </summary>
+        public NoteViewModel()
+        {
+            NoteTitle = string.Empty;
+            NoteDate = DateTime.Now;
+            NoteContent = string.Empty;
+            NotePreview = string.Empty;
+        }
     }
 }
