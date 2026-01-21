@@ -8,6 +8,7 @@
 using MadisonChurchConnect.Models.DomainModels;
 using MadisonChurchConnect.Models.ViewModels;
 using MadisonChurchConnect.Services.Interfaces;
+using MadisonChurchConnect.Services.Mapper;
 
 namespace MadisonChurchConnect.Services.BusinessLogic
 {
@@ -32,7 +33,23 @@ namespace MadisonChurchConnect.Services.BusinessLogic
         /// <returns></returns>
         public int AddNewNote(NoteViewModel newViewNote)
         {
-            
+            // declare
+            NoteDomainModel newDomainNote;
+
+            // try/catch for mapping the viewNote to domainNote
+            try
+            {
+                // use the mapper to map the view model to a domain model
+                newDomainNote = NoteMapper.ToDomainModel(newViewNote);
+            }
+            catch (ArgumentNullException)
+            {
+                // return to show that the parameter was null
+                return -1;
+            }
+
+            // send the domain model to the dao and return result
+            return _noteDAO.AddNewNote(newDomainNote);
         }
 
         /// <summary>
@@ -42,16 +59,40 @@ namespace MadisonChurchConnect.Services.BusinessLogic
         /// <returns></returns>
         public NoteViewModel GetNoteById(int noteId)
         {
+            // declare a new domain note and get note id
+            NoteDomainModel domainNote = _noteDAO.GetNoteById(noteId);
 
+            // if domain note is null, return null
+            if (domainNote == null)
+            {
+                return null;
+            }
+
+            // map the domain note to a view note and retrun
+            return NoteMapper.ToViewModel(domainNote);
         }
 
         /// <summary>
-        /// gets all saved notes from the database
+        /// gets all saved notes
         /// </summary>
         /// <returns></returns>
         public List<NoteViewModel> GetAllNotes()
         {
+            // get all games from dao
+            List<NoteDomainModel> domainNotes = _noteDAO.GetAllNotes();
 
+            // map to view models
+            List<NoteViewModel> viewNotes = new List<NoteViewModel>();
+
+            // loop through the list of notes
+            foreach (NoteDomainModel domainNote in domainNotes)
+            {
+                // map each note to a view note
+                viewNotes.Add(NoteMapper.ToViewModel(domainNote));
+            }
+
+            // return the list of view notes
+            return viewNotes;
         }
 
         /// <summary>
@@ -59,9 +100,13 @@ namespace MadisonChurchConnect.Services.BusinessLogic
         /// </summary>
         /// <param name="noteId"></param>
         /// <returns></returns>
-        public int DeleteNote(int noteId)
+        public bool DeleteNote(int noteId)
         {
+            // get the result of the deleted game
+            int result = _noteDAO.DeleteNote(noteId);
 
+            // return the result and make sure it's more than 0
+            return result > 0;
         }
 
         /// <summary>
@@ -71,7 +116,23 @@ namespace MadisonChurchConnect.Services.BusinessLogic
         /// <returns></returns>
         public int EditNote(NoteViewModel updatedViewNote)
         {
+            // declare
+            NoteDomainModel updatedDomainNote;
 
+            // try/catch for mapping the viewNote to domainNote
+            try
+            {
+                // use the mapper to map the view model to a domain model
+                updatedDomainNote = NoteMapper.ToDomainModel(updatedViewNote);
+            }
+            catch (ArgumentNullException)
+            {
+                // return -1 to show that the parameter was null
+                return -1;
+            }
+
+            // send the domain model to the dao and return result
+            return _noteDAO.EditNote(updatedDomainNote);
         }
     }
 }
