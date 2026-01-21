@@ -43,6 +43,6 @@ namespace MadisonChurchConnect.Services.Interfaces
         /// </summary>
         /// <param name="noteId"></param>
         /// <returns></returns>
-        int EditNote(int noteId);
+        int EditNote(NoteDomainModel updatedNote);
     }
 }
