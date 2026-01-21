@@ -12,6 +12,8 @@ namespace MadisonChurchConnect.Models.ViewModels
     public class NoteViewModel
     {
         // class level properties
+        public int NoteId { get; set; }
+
         [Required]
         public string NoteTitle { get; set; }
 
