@@ -43,6 +43,7 @@ namespace MadisonChurchConnect.Services.DataAccess
                 using (SqlCommand cmd = new SqlCommand(_query, connection, transaction))
                 {
                     // add the parameters for the cmd
+                    cmd.Parameters.AddWithValue("@NoteId", newNote.NoteId);
                     cmd.Parameters.AddWithValue("@NoteTitle", newNote.NoteTitle);
                     cmd.Parameters.AddWithValue("@NoteDate", newNote.NoteDate);
                     cmd.Parameters.AddWithValue("@NoteContent", newNote.NoteContent);
