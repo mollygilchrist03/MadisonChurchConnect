@@ -89,17 +89,17 @@ namespace MadisonChurchConnect.Services.DataAccess
             // create a new sqlconnection object
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
+                // open the connection
+                connection.Open();
+
                 // sql query to select all notes from the notes table
-               _query = "SELECT NoteId, NoteTitle, NoteDate, NoteContent " +
+                _query = "SELECT NoteId, NoteTitle, NoteDate, NoteContent " +
                         "FROM Notes " +
                         "ORDER BY NoteDate DESC";
 
                 // create a sqlcommand to send statements to the mssql server database
                 using (SqlCommand cmd = new SqlCommand(_query, connection))
                 {
-                    // open the connection
-                    connection.Open();
-
                     // execute the query and get a reader
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -125,10 +125,10 @@ namespace MadisonChurchConnect.Services.DataAccess
         }
 
         /// <inheritdoc/>
-        public NoteDomainModel GetNoteById(int noteId)
+        public NoteDomainModel? GetNoteById(int noteId)
         {
             // declare and init
-            NoteDomainModel note = null;
+            NoteDomainModel? note = null;
 
             // create a new sql connection object
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -140,7 +140,32 @@ namespace MadisonChurchConnect.Services.DataAccess
                 _query = "SELECT NoteId, NoteTitle, NoteDate, NoteContent " +
                          "FROM Notes " +
                          "WHERE NoteId = @NoteId";
+
+                // create a sql command to send the query to the database
+                using (SqlCommand cmd = new SqlCommand(_query, connection))
+                {
+                    // add the paramter for the command
+                    cmd.Parameters.AddWithValue("@NoteId", noteId);
+
+                    // set up the reader and execute the command
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        // loop through the reader
+                        while (reader.Read())
+                        {
+                            note = new NoteDomainModel
+                            {
+                                NoteId = reader.GetInt32(0),
+                                NoteTitle = reader.GetString(1),
+                                NoteDate = reader.GetDateTime(2),
+                                NoteContent = reader.GetString(3)
+                            };
+                        }
+                    }
+                }
             }
+            // return the note 
+            return note;
         }
     }
 }
