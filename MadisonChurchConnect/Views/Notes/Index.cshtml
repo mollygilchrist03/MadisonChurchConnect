@@ -4,8 +4,8 @@
     STG-456
     Capstone Project
 -->
+@model IEnumerable<MadisonChurchConnect.Models.ViewModels.NoteViewModel>
 
- 
 @{
     ViewData["Title"] = "Sermon Notes";
 }
@@ -23,26 +23,58 @@
 
     <!-- notes list -->
     <div class="notes-list">
-        <!-- example note card -->
-        <div class="note-card">
-            <div class="note-header">
-                <h3 class="note-title">Faith in Action</h3>
-                <span class="note-date">January 12, 2026</span>
-            </div>
-            <p class="note-preview">
-                Main points: Trust in God's timing, serve others with love...
-            </p>
-            <div class="note-actions">
-                <a asp-area="" asp-controller="Notes" asp-action="Details" asp-route-id="1" class="note-link">View</a>
-                <a asp-area="" asp-controller="Notes" asp-action="Edit" asp-route-id="1" class="note-link">Edit</a>
-            </div>
-        </div>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var note in Model)
+            {
+                <div class="note-card">
+                    <div class="note-header">
+                        <h3 class="note-title">@note.NoteTitle</h3>
+                        <span class="note-date">
+                            @note.NoteDate.ToString("MMMM dd, yyyy")
+                        </span>
+                    </div>
 
-        <!-- empty state if no notes -->
-        <div class="empty-state" style="display: none;">
-            <img src="~/images/file-regular-full.svg" alt="No notes" class="empty-icon" />
-            <p>You haven't created any sermon notes yet.</p>
-            <p>Tap "Create New Note" to get started!</p>
-        </div>
+                    <p class="note-preview">
+                        @(
+                                        note.NoteContent.Length > 100
+                                        ? note.NoteContent.Substring(0, 100) + "..."
+                                        : note.NoteContent
+                                        )
+            </p>
+
+                    <div class="note-actions">
+                        <a asp-controller="Notes"
+                           asp-action="Details"
+                           asp-route-id="@note.NoteId"
+                           class="note-link">
+                            View
+                        </a>
+
+                        <a asp-controller="Notes"
+                           asp-action="Edit"
+                           asp-route-id="@note.NoteId"
+                           class="note-link">
+                            Edit
+                        </a>
+
+                        <a asp-controller="Notes"
+                           asp-action="Delete"
+                           asp-route-id="@note.NoteId"
+                           class="note-link">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+                }
+        }
+        else
+        {
+            <div class="empty-state">
+                <img src="~/images/file-regular-full.svg" alt="No notes" class="empty-icon" />
+                <p>You haven't created any sermon notes yet.</p>
+                <p>Tap "Create New Note" to get started!</p>
+            </div>
+        }
     </div>
 </div>
