@@ -207,7 +207,7 @@ namespace MadisonChurchConnect.Services.DataAccess
         }
 
         /// <inheritdoc/>
-        public NoteDomainModel? GetNoteById(int noteId)
+        public NoteDomainModel GetNoteById(int noteId)
         {
             // declare and init
             NoteDomainModel? note = null;
