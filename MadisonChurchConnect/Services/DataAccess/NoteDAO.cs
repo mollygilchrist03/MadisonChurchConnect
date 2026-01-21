@@ -110,7 +110,55 @@ namespace MadisonChurchConnect.Services.DataAccess
         /// <inheritdoc/>
         public int EditNote(NoteDomainModel updatedNote)
         {
-            throw new NotImplementedException();
+            // declare and int
+            int rowsAffected = 0;
+            SqlTransaction transaction;
+
+            // create a new sqlconnection object
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                // open the connection
+                connection.Open();
+
+                // begin sql transaction
+                transaction = connection.BeginTransaction();
+
+                // sql query to update the note 
+                _query = @"UPDATE Notes 
+                           SET NoteTitle = @NoteTitle, 
+                               NoteDate = @NoteDate,
+                               NoteContent = @NoteContent
+                           WHERE NoteId = @NoteId";
+
+                // create a sqlcommand to send statements to the mssql server database
+                using (SqlCommand cmd = new SqlCommand(_query, connection))
+                {
+                    // add the parameters for the cmd
+                    cmd.Parameters.AddWithValue("@NoteId", updatedNote.NoteId);
+                    cmd.Parameters.AddWithValue("@NoteTitle", updatedNote.NoteTitle);
+                    cmd.Parameters.AddWithValue("@NoteDate", updatedNote.NoteDate);
+                    cmd.Parameters.AddWithValue("@NoteContent", updatedNote.NoteContent);
+
+                    // try/catch for the execute statement
+                    try
+                    {
+                        // execute the update query
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        // rollback transaction if query fails
+                        transaction.Rollback();
+
+                        // return -1 to show exception
+                        return -1;
+                    }
+                }
+                // commit the transaction if successful
+                transaction.Commit();
+            }
+            // return the number of rows affected
+            return rowsAffected;
         }
 
         /// <inheritdoc/>
