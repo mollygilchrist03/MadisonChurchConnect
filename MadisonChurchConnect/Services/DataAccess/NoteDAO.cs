@@ -52,7 +52,8 @@ namespace MadisonChurchConnect.Services.DataAccess
                     {
                         // execute query and capture resulting int inot newNoteId
                         newNoteId = (int)cmd.ExecuteScalar();
-                    } catch (Exception)
+                    } 
+                    catch (Exception)
                     {
                         // rollback transaction if query fails
                         transaction.Rollback();
@@ -71,7 +72,39 @@ namespace MadisonChurchConnect.Services.DataAccess
         /// <inheritdoc/>
         public int DeleteNote(int noteId)
         {
-            throw new NotImplementedException();
+            // delcare and init
+            int rowsAffected = 0;
+
+            // create a new sql connection object
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                // open the connection
+                connection.Open();
+
+                // create the query
+                _query = "DELETE FROM Notes WHERE NoteId = @NoteId";
+
+                // cretae a sql command to send the statement to the database
+                using (SqlCommand cmd = new SqlCommand(_query, connection))
+                {
+                    // add the paramter for the command
+                    cmd.Parameters.AddWithValue("@NoteId", noteId);
+
+                    // try/catch for execute statement
+                    try
+                    {
+                        // execute non-query and put it in the rowsAffected
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        // return -1 to show exception
+                        return -1;
+                    }
+                }
+            }
+            // return rows affected
+            return rowsAffected;
         }
 
         /// <inheritdoc/>
