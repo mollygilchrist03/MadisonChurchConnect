@@ -93,7 +93,7 @@ namespace MadisonChurchConnect.Controllers
                 }
             }
 
-            // reutnr the view with the model if success
+            // return the view with the model if success
             return View(newNote);
         }
 
