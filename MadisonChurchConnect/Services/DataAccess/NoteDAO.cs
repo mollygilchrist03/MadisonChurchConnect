@@ -35,9 +35,9 @@ namespace MadisonChurchConnect.Services.DataAccess
                 transaction = connection.BeginTransaction();
 
                 // create a query for adding a new note
-                _query = "INSERT INTO Notes (NoteId, NoteTitle, NoteDate, NoteContent) " +
-                         "OUTPUT INSERTED.Id " +
-                         "VALUES (@NoteId, @NoteTitle, @NoteDate, @NoteContent)";
+                _query = "INSERT INTO Notes (NoteTitle, NoteDate, NoteContent) " +
+                         "OUTPUT INSERTED.NoteId " +
+                         "VALUES (@NoteTitle, @NoteDate, @NoteContent)";
 
                 // create a sqlcommand to send statements to the mssql server database
                 using (SqlCommand cmd = new SqlCommand(_query, connection, transaction))
