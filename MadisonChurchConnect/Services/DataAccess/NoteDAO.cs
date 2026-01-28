@@ -132,7 +132,7 @@ namespace MadisonChurchConnect.Services.DataAccess
                            WHERE NoteId = @NoteId";
 
                 // create a sqlcommand to send statements to the mssql server database
-                using (SqlCommand cmd = new SqlCommand(_query, connection))
+                using (SqlCommand cmd = new SqlCommand(_query, connection, transaction))
                 {
                     // add the parameters for the cmd
                     cmd.Parameters.AddWithValue("@NoteId", updatedNote.NoteId);
