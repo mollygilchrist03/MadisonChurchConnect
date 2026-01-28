@@ -1,8 +1,69 @@
-﻿@{
+﻿<!--
+    Molly Gilchrist
+    1/28/2026
+    STG-456
+    Capstone Project
+-->
+@{
     ViewData["Title"] = "Sermons";
 }
+<div class="sermons-page">
+    <!-- Watch Sermons Section -->
+    <div class="sermon-info-card">
+        <h3>SERMON SERIES</h3>
+        <p>
+            Join us for inspiring worship and a biblical message this Sunday at 10:30am!
+        </p>
+        <p>
+            You can see a few past sermons below, or hit the watch button to visit our YouTube page where you can see even more!
+        </p>
+        <a href="https://www.youtube.com/@@madisonchurchphx/streams" target="_blank" class="sermon-watch-button">
+            WATCH ON YOUTUBE
+        </a>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- Current Series Announcement -->
+    <div class="sermon-info-card current-series-highlight">
+        <p>Our new series kicks off February 1st. Click the button below to learn more about this new series!</p>
+        <a href="https://madisonphx.org/ehs/" class="sermon-info-button">I want to know more!</a>
+    </div>
+
+    <!-- Recent Sermons Grid -->
+    <h3 class="section-heading">RECENT SERIES</h3>
+    <div class="sermon-grid">
+        <!-- Sermon Card 1 -->
+        <a href="#" class="sermon-card">
+            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
+        </a>
+
+        <!-- Sermon Card 2 -->
+        <a href="#" class="sermon-card">
+            <img src="~/images/sermon2.jpg" alt="Sermon Series 2" class="sermon-image" />
+        </a>
+
+        <!-- Sermon Card 3 -->
+        <a href="#" class="sermon-card">
+            <img src="~/images/sermon3.jpg" alt="Sermon Series 3" class="sermon-image" />
+        </a>
+
+        <!-- Sermon Card 4 -->
+        <a href="#" class="sermon-card">
+            <img src="~/images/sermon4.jpg" alt="Sermon Series 4" class="sermon-image" />
+        </a>
+    </div>
+
+    <!-- Pastor's Note -->
+    <div class="sermon-info-card pastor-note">
+        <h3>A Note From Our Pastor</h3>
+        <p class="pastor-name">PASTOR BRYAN</p>
+        <p>
+            Hey there! Thank you for stopping by our app. If you are searching for a home church,
+            we would love for you to give us a chance. Feel free to check out the "I'm New" button
+            under the Connect tab where you can find the answers to all your questions. If you have never been
+            to our church before, come by this Sunday! We would love to get to know you. We want to see
+            lives changed here by the power of Jesus Christ, and we see that happen every week when
+            someone steps through our doors. We look forward to meeting you! God bless.
+        </p>
+        <a href="https://madisonphx.org/visit/" class="sermon-visit-button">Plan Your Visit</a>
+    </div>
 </div>
