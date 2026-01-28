@@ -275,11 +275,32 @@ a.phone-number {
     gap: 1rem;
 }
 
+.note-card-wrapper {
+    position: relative;
+}
+
+.note-card-clickable {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+    .note-card-clickable:hover {
+        transform: translateY(-2px);
+    }
+
+        .note-card-clickable:hover .note-card {
+            border-color: #4267B2;
+            box-shadow: 0 2px 8px rgba(66, 103, 178, 0.15);
+        }
+
 .note-card {
     padding: 1rem;
     border: 1px solid #4a6fa5;
     border-radius: 8px;
     background-color: white;
+    transition: all 0.2s ease;
 }
 
 .note-header {
@@ -303,23 +324,39 @@ a.phone-number {
 
 .note-preview {
     color: #555;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0;
     line-height: 1.5;
 }
 
-.note-actions {
+.note-card-actions {
+    margin-top: 0.5rem;
     display: flex;
-    gap: 1rem;
+    justify-content: flex-end;
 }
 
-.note-link {
-    color: #4267B2;
+.btn-delete-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 6px;
     text-decoration: none;
+    font-size: 0.875rem;
     font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
-    .note-link:hover {
-        text-decoration: underline;
+    .btn-delete-small:hover {
+        background-color: #b71c1c;
+        color: white;
+    }
+
+    .btn-delete-small .delete-icon {
+        height: 14px;
+        width: 14px;
+        filter: brightness(0) invert(1);
     }
 
 .empty-state {
@@ -340,10 +377,6 @@ a.phone-number {
     padding: 1rem 0;
     max-width: 600px;
     margin: 0 auto;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    border-color: #4a6fa5;
 }
 
     .delete-confirmation h2 {
@@ -427,6 +460,86 @@ a.phone-number {
         background-color: #616161;
         text-decoration: none;
     }
-/* Delete confirmation page */
+
+/* Note View/Details page - improved styling */
+.note-view-card {
+    padding: 1.5rem;
+}
+
+    .note-view-card .form-label {
+        color: #4267B2;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .note-view-card p {
+        color: #333;
+        font-size: 1rem;
+        margin-bottom: 0;
+        padding: 0.5rem 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.8;
+    }
+
+    .note-view-card .form-group:last-of-type p {
+        min-height: 100px;
+    }
+
+    .note-view-card .note-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+    }
+
+@media (min-width: 768px) {
+    .note-view-card .note-actions {
+        flex-direction: row;
+        gap: 1rem;
+    }
+}
+
+/* Edit/Create Note page */
+.note-card .note-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn-note-action {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    background-color: #4267B2;
+    color: #FEFEFA;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-note-action:hover {
+        background-color: #365899;
+        color: #FEFEFA;
+    }
+
+@media (min-width: 768px) {
+    .note-card .note-actions {
+        flex-direction: row;
+    }
+
+    .btn-note-action {
+        flex: 1;
+    }
+}
+/* Edit/Create Note page */
 
 /* NOTES PAGE STYLING */
