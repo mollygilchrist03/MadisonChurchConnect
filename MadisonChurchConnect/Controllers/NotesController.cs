@@ -16,7 +16,7 @@ namespace MadisonChurchConnect.Controllers
         // class level variables
         private readonly NoteLogic _noteLogic;
 
-        // <summary>
+        /// <summary>
         /// parameterized constructor for dependency injection
         /// </summary>
         /// <param name="noteLogic"></param>
@@ -35,26 +35,6 @@ namespace MadisonChurchConnect.Controllers
             List<NoteViewModel> notes = _noteLogic.GetAllNotes();
 
             return View(notes);
-        }
-
-        /// <summary>
-        /// displays a specific note
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IActionResult Details(int id)
-        {
-            // get the note by its id from business logic
-            NoteViewModel note = _noteLogic.GetNoteById(id);
-
-            // check if note is null
-            if (note == null)
-            {
-                return NotFound();
-            }
-
-            // return the view with the note
-            return View(note);
         }
 
         /// <summary>
@@ -93,7 +73,7 @@ namespace MadisonChurchConnect.Controllers
                 }
             }
 
-            // return the view with the model if success
+            // return the view with the model if validation fails
             return View(newNote);
         }
 
