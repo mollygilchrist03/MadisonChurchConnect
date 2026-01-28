@@ -4,15 +4,14 @@
     STG-456
     Capstone Project
 -->
-@model IEnumerable<MadisonChurchConnect.Models.ViewModels.NoteViewModel>
 
+@model IEnumerable<MadisonChurchConnect.Models.ViewModels.NoteViewModel>
 @{
     ViewData["Title"] = "Sermon Notes";
 }
 
 <div class="notes-page">
     <h2 class="page-title">My Sermon Notes</h2>
-
     <!-- create new note button -->
     <div class="create-note-section">
         <a asp-area="" asp-controller="Notes" asp-action="Create" class="btn btn-primary create-note-btn">
@@ -20,52 +19,43 @@
             Create New Note
         </a>
     </div>
-
     <!-- notes list -->
     <div class="notes-list">
         @if (Model != null && Model.Any())
         {
             foreach (var note in Model)
             {
-                <div class="note-card">
-                    <div class="note-header">
-                        <h3 class="note-title">@note.NoteTitle</h3>
-                        <span class="note-date">
-                            @note.NoteDate.ToString("MMMM dd, yyyy")
-                        </span>
-                    </div>
-
-                    <p class="note-preview">
-                        @(
-                                        note.NoteContent.Length > 100
-                                        ? note.NoteContent.Substring(0, 100) + "..."
-                                        : note.NoteContent
-                                        )
-            </p>
-
-                    <div class="note-actions">
-                        <a asp-controller="Notes"
-                           asp-action="Details"
-                           asp-route-id="@note.NoteId"
-                           class="note-link">
-                            View
-                        </a>
-
-                        <a asp-controller="Notes"
-                           asp-action="Edit"
-                           asp-route-id="@note.NoteId"
-                           class="note-link">
-                            Edit
-                        </a>
-
-                        <a asp-controller="Notes"
-                           asp-action="Delete"
-                           asp-route-id="@note.NoteId"
-                           class="note-link">
-                            Delete
-                        </a>
-                    </div>
+                <div class="note-card-wrapper">
+                    <a asp-controller="Notes"
+                       asp-action="Edit"
+                       asp-route-id="@note.NoteId"
+                       class="note-card-clickable">
+                        <div class="note-card">
+                            <div class="note-header">
+                                <h3 class="note-title">@note.NoteTitle</h3>
+                                <span class="note-date">
+                                    @note.NoteDate.ToString("MMMM dd, yyyy")
+                                </span>
+                            </div>
+                            <p class="note-preview">
+                                @(
+                                                        note.NoteContent.Length > 100
+                                                        ? note.NoteContent.Substring(0, 100) + "..."
+                                                        : note.NoteContent
+                                                        )
+                    </p>
                 </div>
+            </a>
+            <div class="note-card-actions">
+                <a asp-controller="Notes"
+                   asp-action="Delete"
+                   asp-route-id="@note.NoteId"
+                   class="btn-delete-small">
+                    <img src="~/images/trash-can-solid-full.svg" alt="Delete" class="delete-icon" />
+                    Delete
+                </a>
+            </div>
+        </div>
                 }
         }
         else
