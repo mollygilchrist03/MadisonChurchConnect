@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Molly Gilchrist
- * STG-446
- * 1/14/2026
+ * 2/5/2026
+ * STG-456
  * Capstone Project
  */
 
@@ -9,5 +9,13 @@ namespace MadisonChurchConnect.Models.ViewModels
 {
     public class SermonViewModel
     {
+        public int SermonId { get; set; }
+        public string? SermonTitle { get; set; }
+        public string? Speaker { get; set; }
+        public DateTime SermonDate { get; set; }
+        public string? VideoUrl { get; set; }
+        public string? Summary { get; set; }
+        public string? Series { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }
