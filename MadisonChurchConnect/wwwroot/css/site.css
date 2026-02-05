@@ -368,84 +368,79 @@ a.phone-number {
     position: relative;
 }
 
-.note-card-clickable {
+/* note cards in the list view only */
+.notes-list .note-card {
+    position: relative;
+    padding: 1rem;
+    padding-right: 3rem; /* extra space on right for delete button */
+    border: 1px solid #4a6fa5;
+    border-radius: 8px;
+    background-color: #f8f9ff;
+    transition: all 0.2s ease;
+}
+
+.notes-list .note-card-clickable {
     text-decoration: none;
     color: inherit;
     display: block;
-    transition: transform 0.2s ease;
 }
 
-    .note-card-clickable:hover {
-        transform: translateY(-2px);
-    }
-
-        .note-card-clickable:hover .note-card {
-            border-color: #4267B2;
-            box-shadow: 0 2px 8px rgba(66, 103, 178, 0.15);
-        }
-
-.note-card {
-    padding: 1rem;
-    border: 1px solid #4a6fa5;
-    border-radius: 8px;
-    background-color: white;
-    transition: all 0.2s ease;
-    background-color: #f8f9ff;
+.notes-list .note-card:hover {
+    border-color: #4267B2;
+    box-shadow: 0 2px 8px rgba(66, 103, 178, 0.15);
+    transform: translateY(-2px);
 }
 
-.note-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
+.notes-list .note-content-wrapper {
+    width: 100%;
 }
 
-.note-title {
+.notes-list .note-title {
     font-size: 1.25rem;
     font-weight: 600;
     color: #333;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
+    padding-right: 0.5rem; /* prevent text from touching delete button */
 }
 
-.note-date {
+.notes-list .note-date {
+    display: block;
     font-size: 0.875rem;
     color: #666;
+    margin-bottom: 0.75rem;
 }
 
-.note-preview {
+.notes-list .note-preview {
     color: #555;
     margin-bottom: 0;
     line-height: 1.5;
 }
 
-.note-card-actions {
-    margin-top: 0.5rem;
+/* delete button in top-right corner - only in list view */
+.notes-list .btn-delete-corner {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
     display: flex;
-    justify-content: flex-end;
-}
-
-.btn-delete-small {
-    display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.4rem 0.75rem;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     background-color: #d32f2f;
-    color: white;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
 }
 
-    .btn-delete-small:hover {
+    .notes-list .btn-delete-corner:hover {
         background-color: #b71c1c;
-        color: white;
+        transform: scale(1.1);
     }
 
-    .btn-delete-small .delete-icon {
-        height: 14px;
-        width: 14px;
+    .notes-list .btn-delete-corner .delete-icon {
+        height: 16px;
+        width: 16px;
         filter: brightness(0) invert(1);
     }
 
@@ -462,7 +457,7 @@ a.phone-number {
     opacity: 0.5;
 }
 
-/* Delete confirmation page */
+/* delete confirmation page */
 .delete-confirmation {
     padding: 1rem 0;
     max-width: 600px;
@@ -551,7 +546,7 @@ a.phone-number {
         text-decoration: none;
     }
 
-/* Note View/Details page - improved styling */
+/* note view/details page - improved styling */
 .note-view-card {
     padding: 1.5rem;
 }
@@ -592,12 +587,19 @@ a.phone-number {
     }
 }
 
-/* Edit/Create Note page */
-.note-card .note-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+/* edit/create note page - use generic .note-card for forms */
+.note-card {
+    padding: 1rem;
+    border: 1px solid #4a6fa5;
+    border-radius: 8px;
+    background-color: #f8f9ff;
 }
+
+    .note-card .note-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
 
 .btn-note-action {
     width: 100%;
@@ -630,6 +632,7 @@ a.phone-number {
         flex: 1;
     }
 }
-/* Edit/Create Note page */
+/* edit/create note page */
 
 /* NOTES PAGE STYLING */
+

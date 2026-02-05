@@ -6,6 +6,7 @@
 -->
 
 @model IEnumerable<MadisonChurchConnect.Models.ViewModels.NoteViewModel>
+
 @{
     ViewData["Title"] = "Sermon Notes";
 }
@@ -26,11 +27,18 @@
             foreach (var note in Model)
             {
                 <div class="note-card-wrapper">
-                    <a asp-controller="Notes"
-                       asp-action="Edit"
-                       asp-route-id="@note.NoteId"
-                       class="note-card-clickable">
-                        <div class="note-card">
+                    <div class="note-card">
+                        <a asp-controller="Notes"
+                           asp-action="Delete"
+                           asp-route-id="@note.NoteId"
+                           class="btn-delete-corner"
+                           onclick="return confirm('Are you sure you want to delete this note?');">
+                            <img src="~/images/trash-can-solid-full.svg" alt="Delete" class="delete-icon" />
+                        </a>
+                        <a asp-controller="Notes"
+                           asp-action="Edit"
+                           asp-route-id="@note.NoteId"
+                           class="note-card-clickable">
                             <div class="note-header">
                                 <h3 class="note-title">@note.NoteTitle</h3>
                                 <span class="note-date">
@@ -44,15 +52,6 @@
                                                         : note.NoteContent
                                                         )
                     </p>
-                </div>
-            </a>
-            <div class="note-card-actions">
-                <a asp-controller="Notes"
-                   asp-action="Delete"
-                   asp-route-id="@note.NoteId"
-                   class="btn-delete-small">
-                    <img src="~/images/trash-can-solid-full.svg" alt="Delete" class="delete-icon" />
-                    Delete
                 </a>
             </div>
         </div>
