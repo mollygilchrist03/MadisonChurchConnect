@@ -102,33 +102,21 @@ body {
 
 
 /* SERMONS PAGE STYLING */
-.sermons-page {
-    padding: 1rem 0;
+.sermons-page > div {
+    margin-bottom: 1rem;
 }
 
-    .sermons-page > div {
-        margin-bottom: 1rem;
-    }
-
-/* Info Cards (like Connect page church-info) */
+/* Info Cards */
 .sermon-info-card {
     position: relative;
     padding: 1rem;
     border: 1px solid #4a6fa5;
     border-radius: 8px;
-    background-color: white;
+    background-color: #f8f9ff;
 }
 
-    .sermon-info-card h3 {
-        color: #4267B2;
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
-        letter-spacing: 0.5px;
-    }
-
     .sermon-info-card p {
-        color: #555;
+        color: black;
         line-height: 1.6;
         margin-bottom: 0.75rem;
     }
@@ -144,24 +132,14 @@ body {
 
 /* Pastor Note Styling */
 .pastor-note .pastor-name {
-    color: #4267B2;
+    color: black;
     font-weight: 700;
     letter-spacing: 1px;
     font-size: 0.95rem;
     margin-bottom: 1rem;
 }
 
-/* Section Heading */
-.section-heading {
-    color: #4267B2;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
-    letter-spacing: 0.5px;
-}
-
-/* Sermon Grid (like Connect page connect-actions) */
+/* Sermon Grid */
 .sermon-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -179,11 +157,6 @@ body {
     aspect-ratio: 16 / 9;
 }
 
-    .sermon-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(66, 103, 178, 0.2);
-    }
-
 .sermon-image {
     width: 100%;
     height: 100%;
@@ -191,7 +164,7 @@ body {
     display: block;
 }
 
-/* Buttons (matching Connect page style) */
+/* Buttons */
 .sermon-watch-button,
 .sermon-info-button,
 .sermon-visit-button {
@@ -238,6 +211,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 8px;
     border-color: #4a6fa5;
+    background-color: #f8f9ff;
 }
 
 a.phone-number {
@@ -296,6 +270,7 @@ a.phone-number {
         text-decoration: none;
         border-radius: 8px;
         text-align: center;
+        background-color: #f8f9ff;
     }
 
         .connect-actions a.connect-btn img {
@@ -419,6 +394,7 @@ a.phone-number {
     border-radius: 8px;
     background-color: white;
     transition: all 0.2s ease;
+    background-color: #f8f9ff;
 }
 
 .note-header {
