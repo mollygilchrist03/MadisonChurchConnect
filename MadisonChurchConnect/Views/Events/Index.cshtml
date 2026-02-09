@@ -1,8 +1,140 @@
-﻿@{
+﻿<!--
+    Molly Gilchrist
+    2/9/2026
+    STG-456
+    Capstone Project
+-->
+
+@{
     ViewData["Title"] = "Events";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="event-page">
+    <!-- featured calendar section with icon -->
+    <div class="calendar-card">
+        <div class="calendar-header">
+            <img src="~/images/calendar-days-solid-full.svg" alt="Calendar" class="calendar-icon" />
+            <div>
+                <h3>Monthly Church Calendar</h3>
+                <p class="calendar-subtitle">
+                    Stay up to date with all the happenings at Madison Church!
+                </p>
+            </div>
+        </div>
+        <div class="iframe-responsive-container">
+            <iframe src="https://calendar.google.com/calendar/embed?src=1759im1fg2kq61d5anobfs5agk@group.calendar.google.com&amp;showTitle=1&amp;showNav=1&amp;showDate=1&amp;showPrint=1&amp;showTabs=1&amp;showCalendars=1&amp;showTz=1&amp;mode=month&amp;wkst=1&amp;bgcolor=%23FFFFFF" class="moto-widget-google-calendar__iframe" width="100%" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+
+    <!-- weekly events section -->
+    <div class="section-header">
+        <h3>Weekly Events</h3>
+        <div class="section-underline"></div>
+    </div>
+
+    <div class="event-grid">
+        <!-- SUNDAY - adult bible study -->
+        <div class="event-info-card adult-bible-study">
+            <div class="event-icon-wrapper study">
+                <img src="~/images/user-solid-full.svg" alt="Group Study" class="event-card-icon" />
+            </div>
+            <h3>Adult Bible Study</h3>
+            <div class="event-meta">
+                <span class="event-day">Sundays</span>
+                <span class="event-time">9:00 AM</span>
+            </div>
+            <p>Join us in Room #2 before the main service to grow deeper in your faith.</p>
+        </div>
+
+        <!-- SUNDAY - children's church -->
+        <div class="event-info-card childrens-church">
+            <div class="event-icon-wrapper kids">
+                <img src="~/images/children-solid-full.svg" alt="Children" class="event-card-icon" />
+            </div>
+            <h3>Children's Church</h3>
+            <div class="event-meta">
+                <span class="event-day">Sundays</span>
+                <span class="event-time">10:30 AM</span>
+            </div>
+            <p>A place for kids to learn about Jesus on their level during the main service!</p>
+        </div>
+
+        <!-- TUESDAY - women's bible study -->
+        <div class="event-info-card womens-bible-study">
+            <div class="event-icon-wrapper women">
+                <img src="~/images/book-open-solid-full.svg" alt="Bible Study" class="event-card-icon" />
+            </div>
+            <h3>Women's Bible Study</h3>
+            <div class="event-meta">
+                <span class="event-day">Tuesdays</span>
+                <span class="event-time">11:30 AM</span>
+            </div>
+            <p>Deep dive into scripture with a great community of women in Room #8.</p>
+        </div>
+
+        <!-- WEDNESDAY - family dinners (featured) -->
+        <div class="event-info-card wednesday-nights featured">
+            <div class="event-icon-wrapper community">
+                <img src="~/images/utensils-solid-full.svg" alt="Dinner" class="event-card-icon" />
+            </div>
+            <h3>Wednesday Night Family Dinners</h3>
+            <div class="event-meta">
+                <span class="event-day">Wednesdays</span>
+                <span class="event-time">5:30 PM</span>
+            </div>
+            <p>For the whole family! Dinner at 5:30pm ($5 suggested donation), followed by Bible studies for all ages at 6:15pm. Newcomers always welcome!</p>
+        </div>
+
+        <!-- WEDNESDAY - youth group -->
+        <div class="event-info-card youth-group">
+            <div class="event-icon-wrapper youth">
+                <img src="~/images/user-group-solid-full.svg" alt="Youth" class="event-card-icon" />
+            </div>
+            <h3>Youth Group</h3>
+            <div class="event-meta">
+                <span class="event-day">Wednesdays</span>
+                <span class="event-time">6:15 PM</span>
+            </div>
+            <p>Build friendships and navigate life through the Gospel with other youth. CURRENTLY WITH ADULT BIBLE STUDY!</p>
+        </div>
+
+        <!-- THURSDAY - basketball -->
+        <div class="event-info-card basketball">
+            <div class="event-icon-wrapper sports">
+                <img src="~/images/basketball-solid-full.svg" alt="Basketball" class="event-card-icon" />
+            </div>
+            <h3>Madison Basketball</h3>
+            <div class="event-meta">
+                <span class="event-day">Thursdays</span>
+                <span class="event-time">6:00 PM</span>
+            </div>
+            <p>Open gym for adults in the church gym. All skill levels welcome to join!</p>
+        </div>
+
+        <!-- FRIDAY - young adults -->
+        <div class="event-info-card madison-young-adults">
+            <div class="event-icon-wrapper young-adults">
+                <img src="~/images/people-group-solid-full.svg" alt="Young Adults" class="event-card-icon" />
+            </div>
+            <h3>Young Adults</h3>
+            <div class="event-meta">
+                <span class="event-day">Fridays</span>
+                <span class="event-time">7:00 PM</span>
+            </div>
+            <p>Social gatherings and targeted small group studies for young adults.</p>
+        </div>
+
+        <!-- SATURDAY - bible journaling -->
+        <div class="event-info-card bible-journaling">
+            <div class="event-icon-wrapper creative">
+                <img src="~/images/palette-solid-full.svg" alt="Art" class="event-card-icon" />
+            </div>
+            <h3>Bible Journaling</h3>
+            <div class="event-meta">
+                <span class="event-day">3rd Saturday</span>
+                <span class="event-time">9:00 AM</span>
+            </div>
+            <p>Join ARTfully Devoted for fellowship and creativity. All skill levels welcome!</p>
+        </div>
+    </div>
 </div>
