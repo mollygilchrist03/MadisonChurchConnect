@@ -12,6 +12,12 @@ namespace MadisonChurchConnect.Services.Mapper
 {
     public class NoteMapper
     {
+        /// <summary>
+        /// maps a NoteViewModel to a NoteDomainModel, throwing an ArgumentNullException if the viewNote is null
+        /// </summary>
+        /// <param name="viewNote"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static NoteDomainModel ToDomainModel(NoteViewModel viewNote)
         {
             // declare and init
@@ -37,6 +43,11 @@ namespace MadisonChurchConnect.Services.Mapper
             return domainModel;
         }
 
+        /// <summary>
+        /// maps a NoteDomainModel to a NoteViewModel, creating a preview of the note content that is 150 characters long or less, adding "..." if the content is longer than 150 characters
+        /// </summary>
+        /// <param name="domainNote"></param>
+        /// <returns></returns>
         public static NoteViewModel ToViewModel(NoteDomainModel domainNote)
         {
             // declare and init
