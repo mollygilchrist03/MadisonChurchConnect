@@ -5,6 +5,7 @@
  * Capstone Project
  */
 
+using MadisonChurchConnect.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MadisonChurchConnect.Controllers
@@ -16,6 +17,16 @@ namespace MadisonChurchConnect.Controllers
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// displays the view for all sermons.
+        /// </summary>
+        /// <param name="allSermons"></param>
+        /// <returns></returns>
+        public IActionResult AllSermons(List<SermonViewModel> allSermons)
         {
             return View();
         }

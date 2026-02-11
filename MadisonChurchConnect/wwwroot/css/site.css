@@ -142,6 +142,52 @@ body {
     margin-bottom: 1rem;
 }
 
+.all-sermons-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background-color: #4267B2;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    grid-column: 1 / -1;
+    text-decoration: none;
+    color: white;
+}
+
+    .all-sermons-btn:visited {
+        color: white;
+    }
+
+.all-sermons-header {
+    position: relative;
+    padding: 1rem;
+    border: 1px solid #4a6fa5;
+    border-radius: 8px;
+    background-color: #f8f9ff;
+}
+
+.all-sermons > div {
+    margin-bottom: 1rem;
+}
+
+.all-sermons p {
+    color: black;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* all sermons grid */
+.all-sermons-grid {
+    padding: 5px;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
 .sermon-card {
     display: block;
     border: 1px solid #4a6fa5;
@@ -479,10 +525,12 @@ a.phone-number {
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 500;
+    text-decoration: none;
+    color: white;
 }
 
-    .create-note-btn:hover {
-        background-color: #365899;
+    .create-note-btn:visited {
+        color: white;
     }
 
 .btn-icon {

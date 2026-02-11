@@ -4,9 +4,11 @@
     STG-456
     Capstone Project
 -->
+
 @{
     ViewData["Title"] = "Sermons";
 }
+
 <div class="sermons-page">
     <!-- Watch Sermons Section -->
     <div class="sermon-info-card">
@@ -43,6 +45,9 @@
         <!-- Sermon Card 4 -->
         <a href="#" class="sermon-card">
             <img src="~/images/sermon4.jpg" alt="Sermon Series 4" class="sermon-image" />
+        </a>
+        <a asp-area="" asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">
+            View All Sermons
         </a>
     </div>
 
