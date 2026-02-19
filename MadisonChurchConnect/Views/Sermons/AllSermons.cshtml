@@ -5,6 +5,8 @@
     Capstone Project
 -->
 
+@model MadisonChurchConnect.Models.ViewModels.AllSermonsPageViewModel
+
 @{
     ViewData["Title"] = "All Sermons";
 }
@@ -12,20 +14,40 @@
 <div class="all-sermons">
     <div class="all-sermons-header">
         <h1>All Sermons</h1>
-        <p>View all past sermons below!</p>
+        <p>Pulled directly from Madison Church YouTube and grouped into sermon series.</p>
     </div>
-    <div class="all-sermons-grid">
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
-        </a>
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
-        </a>
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
-        </a>
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
-        </a>
-    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-warning" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+    else if (Model.Series.Any())
+    {
+        @foreach (var series in Model.Series)
+        {
+            <section class="series-section">
+                <h2 class="series-heading">@series.SeriesName</h2>
+                <div class="all-sermons-grid">
+                    @foreach (var sermon in series.Videos)
+                    {
+                        <a href="@sermon.VideoUrl" target="_blank" rel="noopener noreferrer" class="sermon-card" title="@sermon.Title">
+                            <img src="@sermon.ThumbnailUrl" alt="@sermon.Title" class="sermon-image" />
+                            <div class="sermon-card-content">
+                                <h3>@sermon.Title</h3>
+                                <p>@sermon.PublishedAt.ToString("MMM dd, yyyy")</p>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </section>
+        }
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No sermons found.
+        </div>
+    }
 </div>

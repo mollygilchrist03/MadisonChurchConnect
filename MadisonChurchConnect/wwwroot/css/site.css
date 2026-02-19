@@ -205,6 +205,37 @@ body {
     display: block;
 }
 
+
+.series-section {
+    margin-bottom: 1.5rem;
+}
+
+.series-heading {
+    color: #4267B2;
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.sermon-card {
+    background-color: #fff;
+    aspect-ratio: auto;
+}
+
+.sermon-card-content {
+    padding: 0.75rem;
+}
+
+.sermon-card-content h3 {
+    font-size: 1rem;
+    margin: 0 0 0.35rem 0;
+    color: #1f2f53;
+}
+
+.sermon-card-content p {
+    color: #5a5a5a;
+    font-size: 0.85rem;
+}
+
 /* Buttons */
 .sermon-watch-button,
 .sermon-info-button,
