@@ -1,3 +1,10 @@
+/*
+ * Molly Gilchrist
+ * 2/19/2026
+ * STG-456
+ * Capstone Project
+ */
+
 using System.Text.Json;
 using MadisonChurchConnect.Models.ViewModels;
 using Microsoft.Extensions.Options;
