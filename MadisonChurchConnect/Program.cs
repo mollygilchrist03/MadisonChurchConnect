@@ -1,6 +1,7 @@
 using MadisonChurchConnect.Services.BusinessLogic;
 using MadisonChurchConnect.Services.DataAccess;
 using MadisonChurchConnect.Services.Interfaces;
+using MadisonChurchConnect.Services.YouTube;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddControllersWithViews();
 // Register dependency injection services
 builder.Services.AddScoped<INoteDAO, NoteDAO>();
 builder.Services.AddScoped<NoteLogic>();
+builder.Services.Configure<YouTubeOptions>(builder.Configuration.GetSection(YouTubeOptions.SectionName));
+builder.Services.AddHttpClient<IYouTubeService, YouTubeService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,44 @@
+@model MadisonChurchConnect.Models.ViewModels.SermonSeriesDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.SeriesName;
+}
+
+<div class="series-details-page">
+    <div class="all-sermons-header">
+        <h1>@Model.SeriesName</h1>
+        <p>Sermons listed in chronological order.</p>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-warning" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+    else if (Model.Videos.Any())
+    {
+        <div class="series-videos-list">
+            @foreach (var sermon in Model.Videos)
+            {
+                <article class="series-video-row">
+                    <div class="series-video-meta">
+                        <h2>@sermon.Title</h2>
+                        <p>@sermon.PublishedAt.ToString("MMM dd, yyyy")</p>
+                    </div>
+                    <a href="@sermon.VideoUrl" target="_blank" rel="noopener noreferrer" class="sermon-watch-button">
+                        Watch on YouTube
+                    </a>
+                </article>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No sermons found for this series.
+        </div>
+    }
+
+    <a asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">Back to All Sermon Series</a>
+</div>
