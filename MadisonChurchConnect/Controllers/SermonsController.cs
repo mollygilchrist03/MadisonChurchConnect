@@ -38,5 +38,46 @@ namespace MadisonChurchConnect.Controllers
             AllSermonsPageViewModel model = await _youTubeService.GetSermonsBySeriesAsync();
             return View(model);
         }
+
+        /// <summary>
+        /// displays a single series and all sermons in chronological order.
+        /// </summary>
+        /// <param name="seriesName"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> SeriesDetails(string seriesName)
+        {
+            AllSermonsPageViewModel allSermons = await _youTubeService.GetSermonsBySeriesAsync();
+
+            if (!string.IsNullOrWhiteSpace(allSermons.ErrorMessage))
+            {
+                return View(new SermonSeriesDetailsViewModel
+                {
+                    SeriesName = seriesName ?? string.Empty,
+                    ErrorMessage = allSermons.ErrorMessage
+                });
+            }
+
+            SermonSeriesViewModel? matchedSeries = allSermons.Series
+                .FirstOrDefault(series => string.Equals(series.SeriesName, seriesName, StringComparison.OrdinalIgnoreCase));
+
+            if (matchedSeries == null)
+            {
+                return View(new SermonSeriesDetailsViewModel
+                {
+                    SeriesName = seriesName ?? string.Empty,
+                    ErrorMessage = "That sermon series could not be found."
+                });
+            }
+
+            SermonSeriesDetailsViewModel model = new SermonSeriesDetailsViewModel
+            {
+                SeriesName = matchedSeries.SeriesName,
+                Videos = matchedSeries.Videos
+                    .OrderBy(video => video.PublishedAt)
+                    .ToList()
+            };
+
+            return View(model);
+        }
     }
 }

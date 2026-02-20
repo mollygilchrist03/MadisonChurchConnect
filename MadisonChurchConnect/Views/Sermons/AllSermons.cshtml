@@ -14,7 +14,7 @@
 <div class="all-sermons">
     <div class="all-sermons-header">
         <h1>All Sermons</h1>
-        <p>Pulled directly from Madison Church YouTube and grouped into sermon series.</p>
+        <p>Browse sermon series, then open a series to see all messages in chronological order.</p>
     </div>
 
     @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
@@ -25,24 +25,27 @@
     }
     else if (Model.Series.Any())
     {
-        @foreach (var series in Model.Series)
-        {
-            <section class="series-section">
-                <h2 class="series-heading">@series.SeriesName</h2>
-                <div class="all-sermons-grid">
-                    @foreach (var sermon in series.Videos)
+        <div class="all-sermons-grid">
+            @foreach (var series in Model.Series)
+            {
+                var latestVideo = series.Videos.OrderByDescending(video => video.PublishedAt).FirstOrDefault();
+
+                <a asp-controller="Sermons"
+                   asp-action="SeriesDetails"
+                   asp-route-seriesName="@series.SeriesName"
+                   class="series-card"
+                   title="View @series.SeriesName series">
+                    @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))
                     {
-                        <a href="@sermon.VideoUrl" target="_blank" rel="noopener noreferrer" class="sermon-card" title="@sermon.Title">
-                            <img src="@sermon.ThumbnailUrl" alt="@sermon.Title" class="sermon-image" />
-                            <div class="sermon-card-content">
-                                <h3>@sermon.Title</h3>
-                                <p>@sermon.PublishedAt.ToString("MMM dd, yyyy")</p>
-                            </div>
-                        </a>
+                        <img src="@latestVideo.ThumbnailUrl" alt="@series.SeriesName" class="sermon-image" />
                     }
-                </div>
-            </section>
-        }
+                    <div class="series-card-content">
+                        <h2>@series.SeriesName</h2>
+                        <p>@series.Videos.Count sermon@(series.Videos.Count == 1 ? string.Empty : "s")</p>
+                    </div>
+                </a>
+            }
+        </div>
     }
     else
     {

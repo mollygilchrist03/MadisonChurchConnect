@@ -28,7 +28,7 @@ namespace MadisonChurchConnect.Services.YouTube
             {
                 return new AllSermonsPageViewModel
                 {
-                    ErrorMessage = "YouTube API key is not configured."
+                    ErrorMessage = "YouTube API key is not configured. If you run in Development, ensure appsettings.Development.json does not override YouTube:ApiKey with an empty value."
                 };
             }
 
