@@ -363,6 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Local secret/config overrides (do not commit credentials)
-appsettings.Local.json
-appsettings.*.local.json
-secrets.json
+appsettings.json
+appsettings.Development.json
