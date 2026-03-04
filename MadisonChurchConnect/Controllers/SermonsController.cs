@@ -24,9 +24,28 @@ namespace MadisonChurchConnect.Controllers
         /// returns the default view for the action.
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            AllSermonsPageViewModel allSermons = await _youTubeService.GetSermonsBySeriesAsync();
+
+            if (!string.IsNullOrWhiteSpace(allSermons.ErrorMessage))
+            {
+                return View(new AllSermonsPageViewModel
+                {
+                    ErrorMessage = allSermons.ErrorMessage
+                });
+            }
+
+            List<SermonSeriesViewModel> recentSeries = allSermons.Series
+                .OrderBy(series => series.Videos.Max(video => video.PublishedAt))
+                .TakeLast(4)
+                .Reverse()
+                .ToList();
+
+            return View(new AllSermonsPageViewModel
+            {
+                Series = recentSeries
+            });
         }
 
         /// <summary>

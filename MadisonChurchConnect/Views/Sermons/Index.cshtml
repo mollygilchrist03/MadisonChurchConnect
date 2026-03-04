@@ -5,6 +5,8 @@
     Capstone Project
 -->
 
+@model MadisonChurchConnect.Models.ViewModels.AllSermonsPageViewModel
+
 @{
     ViewData["Title"] = "Sermons";
 }
@@ -26,30 +28,47 @@
 
     <!-- Recent Sermons Grid -->
     <h2 class="section-heading">Recent Series</h2>
-    <div class="sermon-grid">
-        <!-- Sermon Card 1 -->
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon1.jpg" alt="Sermon Series 1" class="sermon-image" />
-        </a>
 
-        <!-- Sermon Card 2 -->
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon2.jpg" alt="Sermon Series 2" class="sermon-image" />
-        </a>
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-warning" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+    else if (Model.Series.Any())
+    {
+        <div class="sermon-grid">
+            @foreach (var series in Model.Series)
+            {
+                var latestVideo = series.Videos.OrderBy(video => video.PublishedAt).LastOrDefault();
 
-        <!-- Sermon Card 3 -->
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon3.jpg" alt="Sermon Series 3" class="sermon-image" />
-        </a>
+                <a asp-controller="Sermons"
+                   asp-action="SeriesDetails"
+                   asp-route-seriesName="@series.SeriesName"
+                   class="sermon-card"
+                   title="View @series.SeriesName series">
+                    @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))
+                    {
+                        <img src="@latestVideo.ThumbnailUrl" alt="@series.SeriesName" class="sermon-image" />
+                    }
+                    <div class="sermon-card-content">
+                        <h3>@series.SeriesName</h3>
+                        <p>@series.Videos.Count sermon@(series.Videos.Count == 1 ? string.Empty : "s")</p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No recent sermon series found.
+        </div>
+    }
 
-        <!-- Sermon Card 4 -->
-        <a href="#" class="sermon-card">
-            <img src="~/images/sermon4.jpg" alt="Sermon Series 4" class="sermon-image" />
-        </a>
-        <a asp-area="" asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">
-            View All Sermons
-        </a>
-    </div>
+    <a asp-area="" asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">
+        View All Sermons
+    </a>
 
     <!-- Pastor's Note -->
     <div class="sermon-info-card pastor-note">
