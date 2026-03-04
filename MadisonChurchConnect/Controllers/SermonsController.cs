@@ -37,8 +37,9 @@ namespace MadisonChurchConnect.Controllers
             }
 
             List<SermonSeriesViewModel> recentSeries = allSermons.Series
-                .OrderByDescending(series => series.Videos.Max(video => video.PublishedAt))
-                .Take(4)
+                .OrderBy(series => series.Videos.Max(video => video.PublishedAt))
+                .TakeLast(4)
+                .Reverse()
                 .ToList();
 
             return View(new AllSermonsPageViewModel

@@ -28,7 +28,7 @@
         <div class="all-sermons-grid">
             @foreach (var series in Model.Series)
             {
-                var latestVideo = series.Videos.OrderByDescending(video => video.PublishedAt).FirstOrDefault();
+                var latestVideo = series.Videos.OrderBy(video => video.PublishedAt).LastOrDefault();
 
                 <a asp-controller="Sermons"
                    asp-action="SeriesDetails"

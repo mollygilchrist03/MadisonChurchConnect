@@ -44,14 +44,16 @@ namespace MadisonChurchConnect.Services.YouTube
             List<SermonVideoViewModel> videos = await GetVideosFromUploadsPlaylistAsync(uploadsPlaylistId);
             List<SermonSeriesViewModel> groupedSeries = videos
                 .GroupBy(video => GetSeriesNameFromTitle(video.Title))
-                .OrderBy(group => group.Key)
                 .Select(group => new SermonSeriesViewModel
                 {
                     SeriesName = group.Key,
                     Videos = group
-                        .OrderByDescending(video => video.PublishedAt)
+                        .OrderBy(video => video.PublishedAt)
                         .ToList()
                 })
+                .OrderBy(series => series.Videos.Max(video => video.PublishedAt))
+                .ThenBy(series => series.SeriesName)
+                .Reverse()
                 .ToList();
 
             return new AllSermonsPageViewModel
