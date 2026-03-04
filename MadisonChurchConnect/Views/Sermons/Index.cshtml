@@ -6,8 +6,6 @@
 -->
 @model MadisonChurchConnect.Models.ViewModels.AllSermonsPageViewModel
 
-@model MadisonChurchConnect.Models.ViewModels.AllSermonsPageViewModel
-
 @{
     ViewData["Title"] = "Sermons";
 }
@@ -29,47 +27,49 @@
 
     <!-- Recent Sermons Grid -->
     <h2 class="section-heading">Recent Series</h2>
+    <div class="recent-sermons">
 
-    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
-    {
-        <div class="alert alert-warning" role="alert">
-            @Model.ErrorMessage
-        </div>
-    }
-    else if (Model.Series.Any())
-    {
-        <div class="sermon-grid">
-            @foreach (var series in Model.Series)
-            {
-                var latestVideo = series.Videos.OrderBy(video => video.PublishedAt).LastOrDefault();
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-warning" role="alert">
+                @Model.ErrorMessage
+            </div>
+        }
+        else if (Model.Series.Any())
+        {
+            <div class="sermon-grid">
+                @foreach (var series in Model.Series)
+                {
+                    var latestVideo = series.Videos.OrderBy(video => video.PublishedAt).LastOrDefault();
 
-                <a asp-controller="Sermons"
-                   asp-action="SeriesDetails"
-                   asp-route-seriesName="@series.SeriesName"
-                   class="sermon-card"
-                   title="View @series.SeriesName series">
-                    @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))
-                    {
-                        <img src="@latestVideo.ThumbnailUrl" alt="@series.SeriesName" class="sermon-image" />
-                    }
-                    <div class="sermon-card-content">
-                        <h3>@series.SeriesName</h3>
-                        <p>@series.Videos.Count sermon@(series.Videos.Count == 1 ? string.Empty : "s")</p>
-                    </div>
-                </a>
-            }
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info" role="alert">
-            No recent sermon series found.
-        </div>
-    }
+                    <a asp-controller="Sermons"
+                       asp-action="SeriesDetails"
+                       asp-route-seriesName="@series.SeriesName"
+                       class="sermon-card"
+                       title="View @series.SeriesName series">
+                        @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))
+                        {
+                            <img src="@latestVideo.ThumbnailUrl" alt="@series.SeriesName" class="sermon-image" />
+                        }
+                        <div class="sermon-card-content">
+                            <h3>@series.SeriesName</h3>
+                            <p>@series.Videos.Count sermon@(series.Videos.Count == 1 ? string.Empty : "s")</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info" role="alert">
+                No recent sermon series found.
+            </div>
+        }
 
-    <a asp-area="" asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">
-        View All Sermons
-    </a>
+        <a asp-area="" asp-controller="Sermons" asp-action="AllSermons" class="all-sermons-btn">
+            View All Sermons
+        </a>
+    </div>
 
     <!-- Pastor's Note -->
     <div class="sermon-info-card pastor-note">
