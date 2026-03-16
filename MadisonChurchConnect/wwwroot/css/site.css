@@ -137,9 +137,24 @@ body {
 /* Sermon Grid */
 .sermon-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr; /* single column stack on mobile */
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+    .sermon-grid .sermon-card {
+        aspect-ratio: 16 / 9;
+    }
+
+@media (min-width: 768px) {
+    .sermon-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+        .sermon-grid .sermon-card {
+            aspect-ratio: 1 / 1;
+        }
 }
 
 .all-sermons-btn {
@@ -225,16 +240,16 @@ body {
     padding: 0.75rem;
 }
 
-.sermon-card-content h3 {
-    font-size: 1rem;
-    margin: 0 0 0.35rem 0;
-    color: #1f2f53;
-}
+    .sermon-card-content h3 {
+        font-size: 1rem;
+        margin: 0 0 0.35rem 0;
+        color: #1f2f53;
+    }
 
-.sermon-card-content p {
-    color: #5a5a5a;
-    font-size: 0.85rem;
-}
+    .sermon-card-content p {
+        color: #5a5a5a;
+        font-size: 0.85rem;
+    }
 
 
 .series-card {
@@ -246,27 +261,27 @@ body {
     background-color: #fff;
 }
 
-.series-card .sermon-image {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    height: auto;
-}
+    .series-card .sermon-image {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        height: auto;
+    }
 
 .series-card-content {
     padding: 0.75rem;
 }
 
-.series-card-content h2 {
-    font-size: 1.05rem;
-    margin: 0 0 0.25rem 0;
-    color: #1f2f53;
-}
+    .series-card-content h2 {
+        font-size: 1.05rem;
+        margin: 0 0 0.25rem 0;
+        color: #1f2f53;
+    }
 
-.series-card-content p {
-    margin: 0;
-    color: #5a5a5a;
-    font-size: 0.9rem;
-}
+    .series-card-content p {
+        margin: 0;
+        color: #5a5a5a;
+        font-size: 0.9rem;
+    }
 
 .series-details-page > div,
 .series-details-page > a {
@@ -320,12 +335,6 @@ body {
         color: white;
         text-decoration: none;
     }
-
-@media (min-width: 768px) {
-    .sermon-grid {
-        gap: 1.5rem;
-    }
-}
 /* SERMONS PAGE STYLING */
 
 
