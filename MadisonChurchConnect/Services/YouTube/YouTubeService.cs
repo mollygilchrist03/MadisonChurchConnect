@@ -32,40 +32,27 @@ namespace MadisonChurchConnect.Services.YouTube
                 };
             }
 
-            string? uploadsPlaylistId = await GetUploadsPlaylistIdAsync();
-            if (string.IsNullOrWhiteSpace(uploadsPlaylistId))
+            string? channelId = await GetChannelIdAsync();
+            if (string.IsNullOrWhiteSpace(channelId))
             {
                 return new AllSermonsPageViewModel
                 {
-                    ErrorMessage = "Unable to load videos from YouTube right now."
+                    ErrorMessage = "Unable to load sermon series from YouTube right now."
                 };
             }
 
-            List<SermonVideoViewModel> videos = await GetVideosFromUploadsPlaylistAsync(uploadsPlaylistId);
-            List<SermonSeriesViewModel> groupedSeries = videos
-                .GroupBy(video => GetSeriesNameFromTitle(video.Title))
-                .Select(group => new SermonSeriesViewModel
-                {
-                    SeriesName = group.Key,
-                    Videos = group
-                        .OrderBy(video => video.PublishedAt)
-                        .ToList()
-                })
-                .OrderBy(series => series.Videos.Max(video => video.PublishedAt))
-                .ThenBy(series => series.SeriesName)
-                .Reverse()
-                .ToList();
+            List<SermonSeriesViewModel> playlistSeries = await GetSeriesFromPlaylistsAsync(channelId);
 
             return new AllSermonsPageViewModel
             {
-                Series = groupedSeries
+                Series = playlistSeries
             };
         }
 
-        private async Task<string?> GetUploadsPlaylistIdAsync()
+        private async Task<string?> GetChannelIdAsync()
         {
             string requestUrl =
-                $"https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle={_options.ChannelHandle}&key={_options.ApiKey}";
+                $"https://www.googleapis.com/youtube/v3/channels?part=id&forHandle={_options.ChannelHandle}&key={_options.ApiKey}";
 
             using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
             if (!response.IsSuccessStatusCode)
@@ -82,91 +69,159 @@ namespace MadisonChurchConnect.Services.YouTube
             }
 
             JsonElement firstItem = items[0];
-            return firstItem
-                .GetProperty("contentDetails")
-                .GetProperty("relatedPlaylists")
-                .GetProperty("uploads")
-                .GetString();
+            return firstItem.GetProperty("id").GetString();
         }
 
-        private async Task<List<SermonVideoViewModel>> GetVideosFromUploadsPlaylistAsync(string uploadsPlaylistId)
+        private async Task<List<SermonSeriesViewModel>> GetSeriesFromPlaylistsAsync(string channelId)
         {
-            string requestUrl =
-                $"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={uploadsPlaylistId}&maxResults={_options.MaxResults}&key={_options.ApiKey}";
+            List<SermonSeriesViewModel> series = new();
+            string? nextPageToken = null;
 
-            using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
-            if (!response.IsSuccessStatusCode)
+            do
             {
-                return new List<SermonVideoViewModel>();
+                string requestUrl =
+                    $"https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&channelId={channelId}&maxResults=50&key={_options.ApiKey}";
+
+                if (!string.IsNullOrWhiteSpace(nextPageToken))
+                {
+                    requestUrl += $"&pageToken={nextPageToken}";
+                }
+
+                using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    break;
+                }
+
+                using Stream contentStream = await response.Content.ReadAsStreamAsync();
+                using JsonDocument document = await JsonDocument.ParseAsync(contentStream);
+
+                if (!document.RootElement.TryGetProperty("items", out JsonElement items))
+                {
+                    break;
+                }
+
+                foreach (JsonElement item in items.EnumerateArray())
+                {
+                    JsonElement snippet = item.GetProperty("snippet");
+                    string playlistId = item.GetProperty("id").GetString() ?? string.Empty;
+
+                    if (string.IsNullOrWhiteSpace(playlistId))
+                    {
+                        continue;
+                    }
+
+                    List<SermonVideoViewModel> playlistVideos = await GetVideosFromPlaylistAsync(playlistId);
+                    if (!playlistVideos.Any())
+                    {
+                        continue;
+                    }
+
+                    series.Add(new SermonSeriesViewModel
+                    {
+                        PlaylistId = playlistId,
+                        SeriesName = snippet.GetProperty("title").GetString() ?? "Untitled Series",
+                        Videos = playlistVideos
+                            .OrderBy(video => video.PublishedAt)
+                            .ToList()
+                    });
+                }
+
+                nextPageToken = document.RootElement.TryGetProperty("nextPageToken", out JsonElement pageTokenElement)
+                    ? pageTokenElement.GetString()
+                    : null;
             }
+            while (!string.IsNullOrWhiteSpace(nextPageToken));
 
-            using Stream contentStream = await response.Content.ReadAsStreamAsync();
-            using JsonDocument document = await JsonDocument.ParseAsync(contentStream);
+            return series
+                .OrderByDescending(sermonSeries => sermonSeries.Videos.Max(video => video.PublishedAt))
+                .ThenBy(sermonSeries => sermonSeries.SeriesName)
+                .ToList();
+        }
 
-            if (!document.RootElement.TryGetProperty("items", out JsonElement items))
-            {
-                return new List<SermonVideoViewModel>();
-            }
-
+        private async Task<List<SermonVideoViewModel>> GetVideosFromPlaylistAsync(string playlistId)
+        {
             List<SermonVideoViewModel> videos = new();
+            string? nextPageToken = null;
 
-            foreach (JsonElement item in items.EnumerateArray())
+            do
             {
-                JsonElement snippet = item.GetProperty("snippet");
-                string? videoId = snippet.GetProperty("resourceId").GetProperty("videoId").GetString();
+                string requestUrl =
+                    $"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={playlistId}&maxResults=50&key={_options.ApiKey}";
 
-                if (string.IsNullOrWhiteSpace(videoId))
+                if (!string.IsNullOrWhiteSpace(nextPageToken))
                 {
-                    continue;
+                    requestUrl += $"&pageToken={nextPageToken}";
                 }
 
-                string thumbnailUrl = string.Empty;
-                if (snippet.GetProperty("thumbnails").TryGetProperty("high", out JsonElement highThumb))
+                using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+                if (!response.IsSuccessStatusCode)
                 {
-                    thumbnailUrl = highThumb.GetProperty("url").GetString() ?? string.Empty;
-                }
-                else if (snippet.GetProperty("thumbnails").TryGetProperty("medium", out JsonElement mediumThumb))
-                {
-                    thumbnailUrl = mediumThumb.GetProperty("url").GetString() ?? string.Empty;
-                }
-                else if (snippet.GetProperty("thumbnails").TryGetProperty("default", out JsonElement defaultThumb))
-                {
-                    thumbnailUrl = defaultThumb.GetProperty("url").GetString() ?? string.Empty;
+                    break;
                 }
 
-                DateTime publishedAt = DateTime.MinValue;
-                DateTime.TryParse(snippet.GetProperty("publishedAt").GetString(), out publishedAt);
+                using Stream contentStream = await response.Content.ReadAsStreamAsync();
+                using JsonDocument document = await JsonDocument.ParseAsync(contentStream);
 
-                videos.Add(new SermonVideoViewModel
+                if (!document.RootElement.TryGetProperty("items", out JsonElement items))
                 {
-                    VideoId = videoId,
-                    Title = snippet.GetProperty("title").GetString() ?? "Untitled Sermon",
-                    Description = snippet.GetProperty("description").GetString() ?? string.Empty,
-                    PublishedAt = publishedAt,
-                    ThumbnailUrl = thumbnailUrl
-                });
+                    break;
+                }
+
+                foreach (JsonElement item in items.EnumerateArray())
+                {
+                    JsonElement snippet = item.GetProperty("snippet");
+                    string? videoId = snippet.GetProperty("resourceId").GetProperty("videoId").GetString();
+
+                    if (string.IsNullOrWhiteSpace(videoId))
+                    {
+                        continue;
+                    }
+
+                    string thumbnailUrl = string.Empty;
+                    if (snippet.GetProperty("thumbnails").TryGetProperty("high", out JsonElement highThumb))
+                    {
+                        thumbnailUrl = highThumb.GetProperty("url").GetString() ?? string.Empty;
+                    }
+                    else if (snippet.GetProperty("thumbnails").TryGetProperty("medium", out JsonElement mediumThumb))
+                    {
+                        thumbnailUrl = mediumThumb.GetProperty("url").GetString() ?? string.Empty;
+                    }
+                    else if (snippet.GetProperty("thumbnails").TryGetProperty("default", out JsonElement defaultThumb))
+                    {
+                        thumbnailUrl = defaultThumb.GetProperty("url").GetString() ?? string.Empty;
+                    }
+
+                    DateTime publishedAt = DateTime.MinValue;
+                    DateTime.TryParse(snippet.GetProperty("publishedAt").GetString(), out publishedAt);
+
+                    videos.Add(new SermonVideoViewModel
+                    {
+                        VideoId = videoId,
+                        Title = snippet.GetProperty("title").GetString() ?? "Untitled Sermon",
+                        Description = snippet.GetProperty("description").GetString() ?? string.Empty,
+                        PublishedAt = publishedAt,
+                        ThumbnailUrl = thumbnailUrl
+                    });
+
+                    if (videos.Count >= _options.MaxResults)
+                    {
+                        break;
+                    }
+                }
+
+                if (videos.Count >= _options.MaxResults)
+                {
+                    break;
+                }
+
+                nextPageToken = document.RootElement.TryGetProperty("nextPageToken", out JsonElement pageTokenElement)
+                    ? pageTokenElement.GetString()
+                    : null;
             }
+            while (!string.IsNullOrWhiteSpace(nextPageToken));
 
             return videos;
-        }
-
-        private static string GetSeriesNameFromTitle(string title)
-        {
-            if (string.IsNullOrWhiteSpace(title))
-            {
-                return "Other Sermons";
-            }
-
-            string[] separators = [" | ", " - ", ": ", " — "];
-            foreach (string separator in separators)
-            {
-                if (title.Contains(separator, StringComparison.Ordinal))
-                {
-                    return title.Split(separator, 2, StringSplitOptions.TrimEntries)[0];
-                }
-            }
-
-            return "Other Sermons";
         }
     }
 }

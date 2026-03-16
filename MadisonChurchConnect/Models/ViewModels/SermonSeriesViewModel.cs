@@ -9,7 +9,9 @@ namespace MadisonChurchConnect.Models.ViewModels
 {
     public class SermonSeriesViewModel
     {
+        public string PlaylistId { get; set; } = string.Empty;
         public string SeriesName { get; set; } = string.Empty;
         public List<SermonVideoViewModel> Videos { get; set; } = new();
+        public string PlaylistUrl => $"https://www.youtube.com/playlist?list={PlaylistId}";
     }
 }
