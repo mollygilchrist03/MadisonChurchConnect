@@ -41,18 +41,21 @@
                 @foreach (var series in Model.Series)
                 {
                     var latestVideo = series.Videos.OrderBy(video => video.PublishedAt).LastOrDefault();
+                    var seriesTitle = !string.IsNullOrWhiteSpace(series.SeriesName)
+                        ? series.SeriesName
+                        : latestVideo?.Title ?? "Untitled Series";
 
                     <a asp-controller="Sermons"
                        asp-action="SeriesDetails"
                        asp-route-playlistId="@series.PlaylistId"
                        class="sermon-card"
-                       title="View @series.SeriesName series">
+                       title="View @seriesTitle series">
                         @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))
                         {
-                            <img src="@latestVideo.ThumbnailUrl" alt="@series.SeriesName" class="sermon-image" />
+                            <img src="@latestVideo.ThumbnailUrl" alt="@seriesTitle" class="sermon-image" />
                         }
                         <div class="sermon-card-content">
-                            <h3>@series.SeriesName</h3>
+                            <h3>@seriesTitle</h3>
                             <p>@series.Videos.Count sermon@(series.Videos.Count == 1 ? string.Empty : "s")</p>
                         </div>
                     </a>
