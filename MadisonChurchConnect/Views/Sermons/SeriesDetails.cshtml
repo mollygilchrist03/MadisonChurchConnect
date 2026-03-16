@@ -7,7 +7,14 @@
 <div class="series-details-page">
     <div class="all-sermons-header">
         <h1>@Model.SeriesName</h1>
-        <p>Sermons listed in chronological order.</p>
+        @if (string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <p>Sermons listed in chronological order.</p>
+        }
+        else
+        {
+            <p>@Model.Description</p>
+        }
     </div>
 
     @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))

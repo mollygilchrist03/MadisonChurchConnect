@@ -91,6 +91,7 @@ namespace MadisonChurchConnect.Controllers
             SermonSeriesDetailsViewModel model = new SermonSeriesDetailsViewModel
             {
                 SeriesName = matchedSeries.SeriesName,
+                Description = matchedSeries.Description,
                 Videos = matchedSeries.Videos
                     .OrderBy(video => video.PublishedAt)
                     .ToList()

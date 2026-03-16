@@ -113,6 +113,7 @@ namespace MadisonChurchConnect.Services.YouTube
                     JsonElement snippet = item.GetProperty("snippet");
                     string playlistId = item.GetProperty("id").GetString() ?? string.Empty;
                     string playlistTitle = snippet.GetProperty("title").GetString() ?? "Untitled Series";
+                    string playlistDescription = snippet.GetProperty("description").GetString() ?? string.Empty;
 
                     if (string.IsNullOrWhiteSpace(playlistId))
                     {
@@ -134,6 +135,7 @@ namespace MadisonChurchConnect.Services.YouTube
                     {
                         PlaylistId = playlistId,
                         SeriesName = playlistTitle,
+                        Description = playlistDescription,
                         Videos = playlistVideos
                             .OrderBy(video => video.PublishedAt)
                             .ToList()
