@@ -44,7 +44,7 @@
 
                     <a asp-controller="Sermons"
                        asp-action="SeriesDetails"
-                       asp-route-seriesName="@series.SeriesName"
+                       asp-route-playlistId="@series.PlaylistId"
                        class="sermon-card"
                        title="View @series.SeriesName series">
                         @if (latestVideo != null && !string.IsNullOrWhiteSpace(latestVideo.ThumbnailUrl))

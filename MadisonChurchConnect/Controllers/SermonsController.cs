@@ -61,9 +61,9 @@ namespace MadisonChurchConnect.Controllers
         /// <summary>
         /// displays a single series and all sermons in chronological order.
         /// </summary>
-        /// <param name="seriesName"></param>
+        /// <param name="playlistId"></param>
         /// <returns></returns>
-        public async Task<IActionResult> SeriesDetails(string seriesName)
+        public async Task<IActionResult> SeriesDetails(string playlistId)
         {
             AllSermonsPageViewModel allSermons = await _youTubeService.GetSermonsBySeriesAsync();
 
@@ -71,19 +71,19 @@ namespace MadisonChurchConnect.Controllers
             {
                 return View(new SermonSeriesDetailsViewModel
                 {
-                    SeriesName = seriesName ?? string.Empty,
+                    SeriesName = string.Empty,
                     ErrorMessage = allSermons.ErrorMessage
                 });
             }
 
             SermonSeriesViewModel? matchedSeries = allSermons.Series
-                .FirstOrDefault(series => string.Equals(series.SeriesName, seriesName, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(series => string.Equals(series.PlaylistId, playlistId, StringComparison.Ordinal));
 
             if (matchedSeries == null)
             {
                 return View(new SermonSeriesDetailsViewModel
                 {
-                    SeriesName = seriesName ?? string.Empty,
+                    SeriesName = string.Empty,
                     ErrorMessage = "That sermon series could not be found."
                 });
             }
