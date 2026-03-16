@@ -13,6 +13,13 @@ namespace MadisonChurchConnect.Services.YouTube
 {
     public class YouTubeService : IYouTubeService
     {
+        private static readonly HashSet<string> ExcludedPlaylistNames = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "MC Rewind",
+            "Small Group Material",
+            "Latest Sermons"
+        };
+
         private readonly HttpClient _httpClient;
         private readonly YouTubeOptions _options;
 
@@ -104,6 +111,13 @@ namespace MadisonChurchConnect.Services.YouTube
                 foreach (JsonElement item in items.EnumerateArray())
                 {
                     JsonElement snippet = item.GetProperty("snippet");
+                    string playlistTitle = snippet.GetProperty("title").GetString() ?? "Untitled Series";
+
+                    if (ExcludedPlaylistNames.Contains(playlistTitle))
+                    {
+                        continue;
+                    }
+
                     string playlistId = item.GetProperty("id").GetString() ?? string.Empty;
 
                     if (string.IsNullOrWhiteSpace(playlistId))
@@ -120,9 +134,9 @@ namespace MadisonChurchConnect.Services.YouTube
                     series.Add(new SermonSeriesViewModel
                     {
                         PlaylistId = playlistId,
-                        SeriesName = snippet.GetProperty("title").GetString() ?? "Untitled Series",
+                        SeriesName = playlistTitle,
                         Videos = playlistVideos
-                            .OrderBy(video => video.PublishedAt)
+                            .OrderByDescending(video => video.PublishedAt)
                             .ToList()
                     });
                 }
