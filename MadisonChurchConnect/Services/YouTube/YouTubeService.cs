@@ -6,6 +6,7 @@
  */
 
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using MadisonChurchConnect.Models.ViewModels;
 using Microsoft.Extensions.Options;
 
@@ -13,6 +14,8 @@ namespace MadisonChurchConnect.Services.YouTube
 {
     public class YouTubeService : IYouTubeService
     {
+        private static readonly Regex SermonDatePattern = new(@"\b\d{1,2}\.\d{1,2}\.\d{4}\b", RegexOptions.Compiled);
+
         private static readonly HashSet<string> ExcludedPlaylistNames = new(StringComparer.OrdinalIgnoreCase)
         {
             "MC Rewind",
@@ -22,6 +25,14 @@ namespace MadisonChurchConnect.Services.YouTube
 
         private readonly HttpClient _httpClient;
         private readonly YouTubeOptions _options;
+
+        private static readonly string[] SermonDateFormats =
+        {
+            "M.d.yyyy",
+            "MM.dd.yyyy",
+            "M.dd.yyyy",
+            "MM.d.yyyy"
+        };
 
         public YouTubeService(HttpClient httpClient, IOptions<YouTubeOptions> options)
         {
@@ -136,7 +147,7 @@ namespace MadisonChurchConnect.Services.YouTube
                         PlaylistId = playlistId,
                         SeriesName = playlistTitle,
                         Videos = playlistVideos
-                            .OrderByDescending(video => video.PublishedAt)
+                            .OrderByDescending(GetVideoSortDate)
                             .ToList()
                     });
                 }
@@ -148,9 +159,26 @@ namespace MadisonChurchConnect.Services.YouTube
             while (!string.IsNullOrWhiteSpace(nextPageToken));
 
             return series
-                .OrderByDescending(sermonSeries => sermonSeries.Videos.Max(video => video.PublishedAt))
+                .OrderByDescending(sermonSeries => sermonSeries.Videos.Max(GetVideoSortDate))
                 .ThenBy(sermonSeries => sermonSeries.SeriesName)
                 .ToList();
+        }
+
+        private static DateTime GetVideoSortDate(SermonVideoViewModel video)
+        {
+            Match matchedDate = SermonDatePattern.Match(video.Title);
+            if (matchedDate.Success
+                && DateTime.TryParseExact(
+                    matchedDate.Value,
+                    SermonDateFormats,
+                    null,
+                    System.Globalization.DateTimeStyles.None,
+                    out DateTime sermonDate))
+            {
+                return sermonDate;
+            }
+
+            return video.PublishedAt;
         }
 
         private async Task<List<SermonVideoViewModel>> GetVideosFromPlaylistAsync(string playlistId)
