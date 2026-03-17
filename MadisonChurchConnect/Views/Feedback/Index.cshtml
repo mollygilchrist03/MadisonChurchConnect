@@ -1,0 +1,98 @@
+﻿<!--
+    Molly Gilchrist
+    3/17/2026
+    STG-456
+    Capstone Project
+-->
+@{
+    ViewData["Title"] = "Feedback";
+    Layout = "_MenuLayout";
+}
+<div class="auth-page">
+    <div class="note-card">
+        <div id="feedback-form-area">
+            <h2 class="page-title">Send Feedback</h2>
+            <p style="color: #555; font-size: 0.9rem; margin-bottom: 1.25rem;">
+                Have a suggestion or found something wrong? Let us know!
+            </p>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Your name" id="feedback-name" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Your email" id="feedback-email" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" rows="5" placeholder="Your feedback..." id="feedback-message"></textarea>
+            </div>
+            <div class="note-actions">
+                <button class="btn-note-action" id="feedback-submit">Send Feedback</button>
+            </div>
+        </div>
+        <!-- confirmation shown after successful send -->
+        <div id="feedback-confirmation" style="display: none; text-align: center; padding: 1.5rem 0;">
+            <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</p>
+            <h3 style="color: #4267B2; margin-bottom: 0.5rem;">Thanks for your feedback!</h3>
+            <p style="color: #555; font-size: 0.9rem;">
+                Your message has been sent successfully.
+            </p>
+        </div>
+    </div>
+    <a asp-controller="Menu" asp-action="Index" class="auth-back-link">
+        Back to Menu
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('feedback-submit').addEventListener('click', async function () {
+            const name = document.getElementById('feedback-name').value.trim();
+            const email = document.getElementById('feedback-email').value.trim();
+            const message = document.getElementById('feedback-message').value.trim();
+
+            // make sure all fields are filled
+            if (!name || !email || !message) {
+                alert('Please fill out all fields before submitting.');
+                return;
+            }
+
+            // disable button while sending
+            const btn = document.getElementById('feedback-submit');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                // post directly to web3forms from the browser
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        access_key: '4ee5cd2d-ce7e-4508-a519-e9db49cfcc40',
+                        subject: 'Madison Church App Feedback',
+                        name: name,
+                        email: email,
+                        message: message
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // hide the form and show confirmation
+                    document.getElementById('feedback-form-area').style.display = 'none';
+                    document.getElementById('feedback-confirmation').style.display = 'block';
+                } else {
+                    alert(result.message || 'Failed to send. Please try again.');
+                    btn.disabled = false;
+                    btn.textContent = 'Send Feedback';
+                }
+            } catch {
+                alert('Something went wrong. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Send Feedback';
+            }
+        });
+    </script>
+}
