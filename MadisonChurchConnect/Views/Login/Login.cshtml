@@ -1,0 +1,49 @@
+﻿<!--
+    Molly Gilchrist
+    3/17/2026
+    STG-456
+    Capstone Project
+-->
+@model MadisonChurchConnect.Models.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_MenuLayout";
+}
+
+<div class="auth-page">
+    <div class="note-card">
+        <h2 class="page-title">Log In</h2>
+
+        <form asp-controller="Login" asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label">Username</label>
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PasswordHash" class="form-label">Password</label>
+                <input asp-for="PasswordHash" class="form-control" placeholder="Password" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <div class="note-actions">
+                <button type="submit" class="btn-note-action">Log In</button>
+                <a asp-controller="Register" asp-action="Register" class="btn-note-action" style="text-align:center;">
+                    Don't have an account? Register
+                </a>
+            </div>
+        </form>
+    </div>
+    <a asp-controller="Menu" asp-action="Index" class="auth-back-link">
+        Back to Menu
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

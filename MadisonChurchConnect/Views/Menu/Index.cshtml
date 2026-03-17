@@ -1,0 +1,128 @@
+﻿<!--
+    Molly Gilchrist
+    3/17/2026
+    STG-456
+    Capstone Project
+-->
+@{
+    ViewData["Title"] = "Menu";
+    Layout = "_MenuLayout";
+}
+
+<div class="more-page">
+
+    <!-- back button -->
+    <button class="menu-back-btn" id="menu-back-btn">
+        <img src="~/images/angle-down-solid-full.svg" alt="Close" class="menu-back-icon" />
+    </button>
+
+    <div class="logo-text-header">
+        <div class="icon-header">
+            <img src="~/images/m-logo-new-white.png" alt="Madison Church Logo" />
+        </div>
+        <p>Madison Church</p>
+    </div>
+
+    <!-- account section -->
+    <div class="more-section-label">Account</div>
+    <div class="more-section">
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Notes" asp-action="Index" class="more-row">
+                <img src="~/images/file-lines-regular-full.svg" alt="Notes" class="more-row-icon" />
+                <span>My Notes</span>
+                <span class="more-row-chevron">›</span>
+            </a>
+            <div class="more-row-divider"></div>
+            <form asp-controller="Login" asp-action="Logout" method="post">
+                <button type="submit" class="more-row more-row-btn">
+                    <img src="~/images/right-to-bracket-solid-full.svg" alt="Log Out" class="more-row-icon icon-flip" />
+                    <span>Log Out</span>
+                    <span class="more-row-chevron">›</span>
+                </button>
+            </form>
+        }
+        else
+        {
+            <a asp-controller="Login" asp-action="Login" class="more-row">
+                <img src="~/images/right-to-bracket-solid-full.svg" alt="Log In" class="more-row-icon" />
+                <span>Log In</span>
+                <span class="more-row-chevron">›</span>
+            </a>
+            <div class="more-row-divider"></div>
+            <a asp-controller="Register" asp-action="Register" class="more-row">
+                <img src="~/images/person-circle-plus-solid-full.svg" alt="Register" class="more-row-icon" />
+                <span>Create Account</span>
+                <span class="more-row-chevron">›</span>
+            </a>
+            <div class="more-row-divider"></div>
+            <a asp-controller="Login" asp-action="Login" class="more-row more-row-disabled">
+                <img src="~/images/file-lines-regular-full.svg" alt="Notes" class="more-row-icon" />
+                <span>My Notes</span>
+                <span class="more-row-note">Login required</span>
+            </a>
+        }
+    </div>
+
+    <!-- general section -->
+    <div class="more-section-label">General</div>
+    <div class="more-section">
+        <a asp-controller="Feedback" asp-action="Index" class="more-row">
+            <img src="~/images/comment-dots-solid-full.svg" alt="Feedback" class="more-row-icon" />
+            <span>Send Feedback</span>
+            <span class="more-row-chevron">›</span>
+        </a>
+        <div class="more-row-divider"></div>
+        <a href="#" class="more-row" id="share-link">
+            <img src="~/images/share-nodes-solid-full.svg" alt="Share" class="more-row-icon" />
+            <span>Share App</span>
+            <span class="more-row-chevron">›</span>
+        </a>
+        <div class="more-row-divider"></div>
+        <a href="https://www.youversion.com/bible-app" class="more-row" id="share-link">
+            <img src="~/images/book-bible-solid-full (1).svg" alt="Bible" class="more-row-icon" />
+            <span>YouVersion Bible App</span>
+            <span class="more-row-chevron">›</span>
+        </a>
+    </div>
+
+    <!-- about section -->
+    <div class="more-section-label">About</div>
+    <div class="more-section">
+        <div class="more-row more-row-static">
+            <img src="~/images/circle-info-solid-full.svg" alt="About" class="more-row-icon" />
+            <span>Version</span>
+            <span class="more-row-value">1.0.0</span>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        // use native share sheet if available, otherwise copy link to clipboard
+        document.getElementById('share-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Madison Church App',
+                    text: 'Check out the Madison Church app!',
+                    url: window.location.origin
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.origin).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        });
+
+                document.getElementById('menu-back-btn').addEventListener('click', function () {
+            // slide the page down then go back
+            document.body.classList.add('slide-down');
+
+            document.body.addEventListener('animationend', function () {
+                window.location.href = '/';
+            }, { once: true });
+        });
+    </script>
+}
