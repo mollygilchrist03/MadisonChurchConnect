@@ -84,8 +84,8 @@ namespace MadisonChurchConnect.Controllers
             // sign the user out and clear the cookie
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
 
-            // redirect to the login page
-            return RedirectToAction("Login");
+            // redirect to the menu page
+            return RedirectToAction("Index", "Menu");
         }
     }
 }
