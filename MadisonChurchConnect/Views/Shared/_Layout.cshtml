@@ -34,8 +34,8 @@
                     </a>
                     <span class="top-nav-text">Madison Church</span>
                 </div>
-                <a class="nav-link notes-icon-link" asp-area="" asp-controller="Notes" asp-action="Index">
-                    <img src="~/images/file-lines-regular-full.svg" alt="Notes" />
+                <a class="nav-link more-icon-link" asp-area="" asp-controller="Menu" asp-action="Index">
+                    <img src="~/images/circle-user-solid-full (1).svg" alt="More" />
                 </a>
             </div>
         </nav>
@@ -84,7 +84,7 @@
 </body>
 
 <script>
-    document.querySelectorAll('.notes-icon-link').forEach(link => {
+    document.querySelectorAll('.more-icon-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             const href = this.getAttribute('href');
