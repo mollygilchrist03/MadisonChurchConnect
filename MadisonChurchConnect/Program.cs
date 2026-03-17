@@ -13,6 +13,16 @@ builder.Services.AddScoped<INoteDAO, NoteDAO>();
 builder.Services.AddScoped<NoteLogic>();
 builder.Services.Configure<YouTubeOptions>(builder.Configuration.GetSection(YouTubeOptions.SectionName));
 builder.Services.AddHttpClient<IYouTubeService, YouTubeService>();
+// register user services
+builder.Services.AddScoped<IUserDAO,UserDAO>();
+builder.Services.AddScoped<UserLogic>();
+
+// register cookie authentication
+builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login/Login";
+    });
 
 var app = builder.Build();
 
@@ -29,6 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
