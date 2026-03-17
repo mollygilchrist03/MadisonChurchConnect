@@ -14,9 +14,14 @@ namespace MadisonChurchConnect.Services.DataAccess
     public class UserDAO : IUserDAO
     {
         // class level variables
-        private readonly string _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MadisonChurchConnectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private readonly string _connectionString = "";
 
         private string _query = "";
+
+        public UserDAO(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("DefaultConnection")!;
+        }
 
         ///<inheritdoc/>
         public int AddUser(UserDomainModel user)

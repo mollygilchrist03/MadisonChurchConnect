@@ -14,9 +14,14 @@ namespace MadisonChurchConnect.Services.DataAccess
     public class NoteDAO : INoteDAO
     {
         // class level variables
-        private readonly string _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MadisonChurchConnectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private readonly string _connectionString = "";
 
         private string _query = "";
+
+        public NoteDAO(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("DefaultConnection")!;
+        }
 
         /// <inheritdoc/>
         public int AddNewNote(NoteDomainModel newNote)
