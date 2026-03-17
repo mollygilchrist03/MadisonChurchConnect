@@ -8,6 +8,7 @@ using MadisonChurchConnect.Models.DomainModels;
 using MadisonChurchConnect.Models.ViewModels;
 using MadisonChurchConnect.Services.Interfaces;
 using MadisonChurchConnect.Services.Mapper;
+using MadisonChurchConnect.Services.Util;
 namespace MadisonChurchConnect.Services.BusinessLogic
 {
     public class UserLogic
