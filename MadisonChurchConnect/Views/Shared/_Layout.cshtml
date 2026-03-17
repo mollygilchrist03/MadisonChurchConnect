@@ -30,7 +30,7 @@
             <div class="container-fluid">
                 <div class="top-nav-left">
                     <a class="navbar-brand" asp-area="" asp-controller="Sermons" asp-action="Index">
-                        <img src="~/images/m-logo-new-white.png" alt="Madison Church Logo" height="40" width="40"/> 
+                        <img src="~/images/m-logo-new-white.png" alt="Madison Church Logo" height="40" width="40" />
                     </a>
                     <span class="top-nav-text">Madison Church</span>
                 </div>
@@ -82,4 +82,23 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+<script>
+    document.querySelectorAll('.notes-icon-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+
+            const iframe = document.createElement('iframe');
+            iframe.src = href;
+            iframe.classList.add('page-transition-overlay');
+            document.body.appendChild(iframe);
+
+            iframe.addEventListener('animationend', () => {
+                window.location.href = href;
+            });
+        });
+    });
+</script>
 </html>

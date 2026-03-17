@@ -919,3 +919,27 @@ a.phone-number {
 
 /* NOTES PAGE STYLING */
 
+/* ANIMATION STYLING */
+.page-transition-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translateY(100%);
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+/* ANIMATION STYLING */
