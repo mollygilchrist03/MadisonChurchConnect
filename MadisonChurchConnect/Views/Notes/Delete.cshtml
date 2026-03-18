@@ -4,33 +4,31 @@
     STG-456
     Capstone Project
 -->
-
 @model MadisonChurchConnect.Models.ViewModels.NoteViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Note";
+    Layout = "_MenuLayout";
 }
 
-<div class="delete-confirmation">
-    <h2>Delete Note</h2>
-    <h3>Are you sure you want to delete this note?</h3>
+<div class="auth-page">
+    <div class="note-card">
+        <h2 class="page-title" style="color: #d32f2f;">Delete Note?</h2>
+        <p class="mb-4">Are you sure you want to permanently delete <strong>"@Model.NoteTitle"</strong>?</p>
 
-    <div class="note-detials">
-        <dl>
-            <dt>Title:</dt>
-            <dd>@Model.NoteTitle</dd>
+        <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+            <small class="text-muted">@Model.NoteDate.ToString("MMM dd, yyyy")</small>
+            <p style="font-style: italic; font-size: 0.9rem;">
+                @(Model.NoteContent.Length > 150 ? Model.NoteContent.Substring(0, 150) + "..." : Model.NoteContent)
+            </p>
+        </div>
 
-            <dt>Date:</dt>
-            <dd>@Model.NoteDate.ToString("MMM dd, yyyy")</dd>
-
-            <dt>Content:</dt>
-            <dd>@Model.NoteContent</dd>
-        </dl>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="NoteId" />
+            <div class="note-actions">
+                <button type="submit" class="btn-note-action" style="background-color: #d32f2f;">Yes, Delete</button>
+                <a asp-action="Index" class="btn-note-action" style="background-color: #757575; text-align:center; text-decoration: none;">Cancel</a>
+            </div>
+        </form>
     </div>
-
-    <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="NoteId" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </form>
 </div>
