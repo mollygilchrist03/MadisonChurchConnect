@@ -106,28 +106,11 @@ namespace MadisonChurchConnect.Controllers
         }
 
         /// <summary>
-        /// get method to log the user out when the logout route is requested directly
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            return await LogoutCurrentUserAsync();
-        }
-
-        /// <summary>
         /// post method to log the user out
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogoutPost()
-        {
-            return await LogoutCurrentUserAsync();
-        }
-
-        /// <summary>
-        /// signs the current user out and redirects to the menu page
-        /// </summary>
-        private async Task<IActionResult> LogoutCurrentUserAsync()
+        public async Task<IActionResult> Logout()
         {
             // sign the user out and clear the cookie
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
