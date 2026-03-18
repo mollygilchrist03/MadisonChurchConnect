@@ -36,15 +36,18 @@ namespace MadisonChurchConnect.Controllers
                 });
             }
 
+            // Logic for ordering the series by the most recent video
             List<SermonSeriesViewModel> recentSeries = allSermons.Series
                 .OrderBy(series => series.Videos.Max(video => video.PublishedAt))
-                .TakeLast(4)
-                .Reverse()
+                .Reverse() // Move the newest to the top
+                .Take(4)   // Take the top 4
                 .ToList();
 
             return View(new AllSermonsPageViewModel
             {
-                Series = recentSeries
+                Series = recentSeries,
+                // Grab the name of the very first series in our sorted list
+                CurrentSeriesName = recentSeries.FirstOrDefault()?.SeriesName ?? "Our Latest Series"
             });
         }
 

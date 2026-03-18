@@ -13,12 +13,13 @@
 <div class="sermons-page">
     <!-- Watch Sermons Section -->
     <div class="sermon-info-card">
-        <h2>Current Series</h2>
+        <h2>Welcome!</h2>
         <p>
-            Join us for inspiring worship and a biblical message this Sunday at 10:30am!
+            Join us for worship this Sunday at 10:30am as we continue our
+            <strong>@Model.CurrentSeriesName</strong> series!
         </p>
         <p>
-            You can see a few past sermons below, or hit the watch button to visit our YouTube page where you can see even more!
+            Watch past messages below or visit our YouTube channel for more!
         </p>
         <a href="https://www.youtube.com/@@madisonchurchphx/videos" target="_blank" class="sermon-watch-button">
             Watch on Youtube
@@ -26,7 +27,7 @@
     </div>
 
     <!-- Recent Sermons Grid -->
-    <h2 class="section-heading">Recent Series</h2>
+    <h2 class="section-heading">Watch Latest Messages</h2>
     <div class="recent-sermons">
 
         @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))

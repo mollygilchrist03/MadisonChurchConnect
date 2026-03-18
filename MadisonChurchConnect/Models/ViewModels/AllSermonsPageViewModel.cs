@@ -11,5 +11,6 @@ namespace MadisonChurchConnect.Models.ViewModels
     {
         public List<SermonSeriesViewModel> Series { get; set; } = new();
         public string? ErrorMessage { get; set; }
+        public string? CurrentSeriesName { get; set; }
     }
 }
