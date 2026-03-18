@@ -14,9 +14,8 @@ namespace MadisonChurchConnect.Services.DataAccess
     public class UserDAO : IUserDAO
     {
         // class level variables
-        private readonly string _connectionString = "";
-
         private string _query = "";
+        private readonly string _connectionString;
 
         public UserDAO(IConfiguration config)
         {

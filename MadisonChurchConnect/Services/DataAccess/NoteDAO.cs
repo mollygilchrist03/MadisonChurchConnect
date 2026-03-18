@@ -14,9 +14,8 @@ namespace MadisonChurchConnect.Services.DataAccess
     public class NoteDAO : INoteDAO
     {
         // class level variables
-        private readonly string _connectionString = "";
-
         private string _query = "";
+        private readonly string _connectionString;
 
         public NoteDAO(IConfiguration config)
         {
@@ -48,7 +47,6 @@ namespace MadisonChurchConnect.Services.DataAccess
                 using (SqlCommand cmd = new SqlCommand(_query, connection, transaction))
                 {
                     // add the parameters for the cmd
-                    cmd.Parameters.AddWithValue("@NoteId", newNote.NoteId);
                     cmd.Parameters.AddWithValue("@NoteTitle", newNote.NoteTitle);
                     cmd.Parameters.AddWithValue("@NoteDate", newNote.NoteDate);
                     cmd.Parameters.AddWithValue("@NoteContent", newNote.NoteContent);
