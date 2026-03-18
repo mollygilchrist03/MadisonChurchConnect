@@ -5,7 +5,6 @@
  * Capstone Project
  */
 
-using System.Diagnostics;
 using MadisonChurchConnect.Models.DomainModels;
 using MadisonChurchConnect.Services.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -17,12 +16,10 @@ namespace MadisonChurchConnect.Services.DataAccess
         // class level variables
         private string _query = "";
         private readonly string _connectionString;
-        private readonly ILogger<UserDAO> _logger;
 
-        public UserDAO(IConfiguration config, ILogger<UserDAO> logger)
+        public UserDAO(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("DefaultConnection")!;
-            _logger = logger;
         }
 
         ///<inheritdoc/>
@@ -87,19 +84,12 @@ namespace MadisonChurchConnect.Services.DataAccess
         {
             // declare and initialize found user
             UserDomainModel? foundUser = null;
-            Stopwatch connectionOpenStopwatch = Stopwatch.StartNew();
 
             // create a new sql connection
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 // open the connection
                 connection.Open();
-                connectionOpenStopwatch.Stop();
-
-                _logger.LogInformation(
-                    "SQL connection opened for username lookup '{Username}' in {ElapsedMilliseconds} ms.",
-                    username,
-                    connectionOpenStopwatch.ElapsedMilliseconds);
 
                 // create a query to get a user by username
                 _query = @"SELECT UserId, FirstName, LastName, Username, PasswordHash, Email, PhoneNumber
@@ -111,7 +101,6 @@ namespace MadisonChurchConnect.Services.DataAccess
                 {
                     // add the username parameter
                     cmd.Parameters.AddWithValue("@Username", username);
-                    Stopwatch queryStopwatch = Stopwatch.StartNew();
 
                     // execute the command and read the results
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -140,13 +129,6 @@ namespace MadisonChurchConnect.Services.DataAccess
                             }
                         }
                     }
-
-                    queryStopwatch.Stop();
-                    _logger.LogInformation(
-                        "SQL username lookup finished for '{Username}' in {ElapsedMilliseconds} ms. Found user: {WasUserFound}",
-                        username,
-                        queryStopwatch.ElapsedMilliseconds,
-                        foundUser != null);
                 }
             }
 

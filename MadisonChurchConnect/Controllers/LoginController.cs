@@ -5,7 +5,6 @@
  * Capstone Project
  */
 
-using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +17,14 @@ namespace MadisonChurchConnect.Controllers
     public class LoginController : Controller
     {
         // class level variables
-        private readonly UserLogic _userLogic;
-        private readonly ILogger<LoginController> _logger;
+        private UserLogic _userLogic;
 
         /// <summary>
         /// parameterized constructor
         /// </summary>
-        public LoginController(UserLogic userLogic, ILogger<LoginController> logger)
+        public LoginController(UserLogic userLogic)
         {
             _userLogic = userLogic;
-            _logger = logger;
         }
 
         /// <summary>
@@ -43,8 +40,7 @@ namespace MadisonChurchConnect.Controllers
         /// post method to process the login form
         /// </summary>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(UserViewModel user)
+        public IActionResult Login(UserViewModel user)
         {
             // declare variables
             bool isValidated = false;
@@ -52,20 +48,9 @@ namespace MadisonChurchConnect.Controllers
             List<Claim> claims = new List<Claim>();
             ClaimsIdentity claimsIdentity;
             ClaimsPrincipal claimsPrincipal;
-            Stopwatch totalStopwatch = Stopwatch.StartNew();
-            Stopwatch credentialValidationStopwatch = Stopwatch.StartNew();
-
-            _logger.LogInformation("Login attempt started for username '{Username}'.", user.Username);
 
             // validate the user's credentials
             (isValidated, validatedUser) = _userLogic.ValidateUserCredentials(user.Username, user.PasswordHash);
-            credentialValidationStopwatch.Stop();
-
-            _logger.LogInformation(
-                "Login credential validation finished for username '{Username}' in {ElapsedMilliseconds} ms. Success: {IsValidated}",
-                user.Username,
-                credentialValidationStopwatch.ElapsedMilliseconds,
-                isValidated);
 
             // if credentials are valid, sign the user in
             if (isValidated && validatedUser != null)
@@ -79,26 +64,11 @@ namespace MadisonChurchConnect.Controllers
                 claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
                 // sign the user in and store the claims principal in a cookie
-                Stopwatch signInStopwatch = Stopwatch.StartNew();
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-                signInStopwatch.Stop();
-                totalStopwatch.Stop();
-
-                _logger.LogInformation(
-                    "Login cookie sign-in finished for username '{Username}' in {SignInElapsedMilliseconds} ms. Total login time: {TotalElapsedMilliseconds} ms.",
-                    validatedUser.Username,
-                    signInStopwatch.ElapsedMilliseconds,
-                    totalStopwatch.ElapsedMilliseconds);
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal).Wait();
 
                 // redirect to the sermons page after login
                 return RedirectToAction("Index", "Sermons");
             }
-
-            totalStopwatch.Stop();
-            _logger.LogWarning(
-                "Login attempt failed for username '{Username}' after {TotalElapsedMilliseconds} ms.",
-                user.Username,
-                totalStopwatch.ElapsedMilliseconds);
 
             // add an error message and reload the login page
             ModelState.AddModelError("", "Your username or password was incorrect. Please try again.");
@@ -106,31 +76,13 @@ namespace MadisonChurchConnect.Controllers
         }
 
         /// <summary>
-        /// get method to log the user out when the logout route is requested directly
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> Logout()
-        {
-            return await LogoutCurrentUserAsync();
-        }
-
-        /// <summary>
         /// post method to log the user out
         /// </summary>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogoutPost()
-        {
-            return await LogoutCurrentUserAsync();
-        }
-
-        /// <summary>
-        /// signs the current user out and redirects to the menu page
-        /// </summary>
-        private async Task<IActionResult> LogoutCurrentUserAsync()
+        public IActionResult Logout()
         {
             // sign the user out and clear the cookie
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
 
             // redirect to the menu page
             return RedirectToAction("Index", "Menu");

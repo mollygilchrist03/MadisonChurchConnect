@@ -5,7 +5,6 @@
  * Capstone Project
  */
 
-using System.Diagnostics;
 using MadisonChurchConnect.Models.DomainModels;
 using MadisonChurchConnect.Models.ViewModels;
 using MadisonChurchConnect.Services.Interfaces;
@@ -18,15 +17,13 @@ namespace MadisonChurchConnect.Services.BusinessLogic
     {
         // class level variables
         private IUserDAO _userDAO;
-        private readonly ILogger<UserLogic> _logger;
 
         /// <summary>
         /// parameterized constructor
         /// </summary>
-        public UserLogic(IUserDAO userDAO, ILogger<UserLogic> logger)
+        public UserLogic(IUserDAO userDAO)
         {
             _userDAO = userDAO;
-            _logger = logger;
         }
 
         /// <summary>
@@ -64,45 +61,18 @@ namespace MadisonChurchConnect.Services.BusinessLogic
             UserDomainModel? domainUser;
             UserViewModel? viewUser = null;
             bool userExists = false, isValidated = false;
-            Stopwatch lookupStopwatch = Stopwatch.StartNew();
 
             // look up the user by username
             (userExists, domainUser) = _userDAO.GetUserFromUsername(username);
-            lookupStopwatch.Stop();
-
-            _logger.LogInformation(
-                "User lookup finished for username '{Username}' in {ElapsedMilliseconds} ms. Found user: {UserExists}",
-                username,
-                lookupStopwatch.ElapsedMilliseconds,
-                userExists);
 
             // verify the password if the user was found
-            if (userExists && domainUser != null)
+            if (userExists && domainUser != null && HashingHelper.VerifyPassword(domainUser.PasswordHash, password))
             {
-                Stopwatch passwordVerificationStopwatch = Stopwatch.StartNew();
-                bool isPasswordValid = HashingHelper.VerifyPassword(domainUser.PasswordHash, password);
-                passwordVerificationStopwatch.Stop();
+                // map the domain model to a view model
+                viewUser = UserMapper.FromDomainModel(domainUser);
 
-                _logger.LogInformation(
-                    "Password verification finished for username '{Username}' in {ElapsedMilliseconds} ms. Success: {IsPasswordValid}",
-                    username,
-                    passwordVerificationStopwatch.ElapsedMilliseconds,
-                    isPasswordValid);
-
-                if (isPasswordValid)
-                {
-                    // map the domain model to a view model
-                    viewUser = UserMapper.FromDomainModel(domainUser);
-
-                    // set isvalidated to true
-                    isValidated = true;
-                }
-            }
-            else
-            {
-                _logger.LogInformation(
-                    "Skipping password verification for username '{Username}' because no matching user was found.",
-                    username);
+                // set isvalidated to true
+                isValidated = true;
             }
 
             // return whether the user was validated and the view model
