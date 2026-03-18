@@ -17,7 +17,7 @@ namespace MadisonChurchConnect.Controllers
     public class LoginController : Controller
     {
         // class level variables
-        private UserLogic _userLogic;
+        private readonly UserLogic _userLogic;
 
         /// <summary>
         /// parameterized constructor
@@ -40,6 +40,7 @@ namespace MadisonChurchConnect.Controllers
         /// post method to process the login form
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(UserViewModel user)
         {
             // declare variables
@@ -79,6 +80,7 @@ namespace MadisonChurchConnect.Controllers
         /// post method to log the user out
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Logout()
         {
             // sign the user out and clear the cookie

@@ -52,6 +52,7 @@ namespace MadisonChurchConnect.Controllers
         /// <param name="newNote"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(NoteViewModel newNote)
         {
             // check if the model state is valid
@@ -104,6 +105,7 @@ namespace MadisonChurchConnect.Controllers
         /// <param name="updatedNote"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, NoteViewModel updatedNote)
         {
             // check if the id matches
@@ -161,6 +163,7 @@ namespace MadisonChurchConnect.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             // delete the note using business logic
