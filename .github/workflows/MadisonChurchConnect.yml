@@ -9,6 +9,8 @@ env:
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: MadisonChurchConnect
+  # Define your base version here
+  VERSION_PREFIX: 1.1.0
 
 jobs:
   build:
@@ -19,14 +21,30 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+      
       - name: Restore
         run: dotnet restore "${{ env.WORKING_DIRECTORY }}"
+      
+      # Added versioning to the Build step
       - name: Build
-        run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
+        run: |
+          dotnet build "${{ env.WORKING_DIRECTORY }}" `
+          --configuration ${{ env.CONFIGURATION }} `
+          --no-restore `
+          -p:Version=${{ env.VERSION_PREFIX }}.${{ github.run_number }}
+          
       - name: Test
         run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
+      
+      # Added versioning to the Publish step to ensure consistency
       - name: Publish
-        run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+        run: |
+          dotnet publish "${{ env.WORKING_DIRECTORY }}" `
+          --configuration ${{ env.CONFIGURATION }} `
+          --no-build `
+          --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}" `
+          -p:Version=${{ env.VERSION_PREFIX }}.${{ github.run_number }}
+
       - name: Publish Artifacts
         uses: actions/upload-artifact@v4
         with:
