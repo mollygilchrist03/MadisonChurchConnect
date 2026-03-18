@@ -33,6 +33,7 @@ body {
 /* _LAYOUT PAGE STYLING */
 .top-icon-bar, .bottom-navbar {
     background-color: #4267B2;
+    padding-bottom: 10px;
 }
 
 .top-icon-bar {
