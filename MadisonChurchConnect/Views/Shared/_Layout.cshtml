@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Molly Gilchrist
     1/13/2026
     STG-456
@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] - Madison Church Connect</title>
+    <meta name="description" content="Madison Church Connect is a Progressive Web App for sermons, events, notes, giving, and church connection resources." />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MadisonChurchConnect.styles.css" asp-append-version="true" />
@@ -24,47 +25,49 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="app-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
-        <!-- top navbar -->
-        <nav class="navbar navbar-dark top-icon-bar">
+        <nav class="navbar navbar-dark top-icon-bar" aria-label="Primary header">
             <div class="container-fluid">
                 <div class="top-nav-left">
-                    <a class="navbar-brand" asp-area="" asp-controller="Sermons" asp-action="Index">
-                        <img src="~/images/m-logo-new-white.png" alt="Madison Church Logo" height="40" width="40" />
+                    <a class="navbar-brand" asp-area="" asp-controller="Sermons" asp-action="Index" aria-label="Madison Church home">
+                        <img src="~/images/m-logo-new-white.png" alt="Madison Church logo" height="40" width="40" />
                     </a>
                     <span class="top-nav-text">Madison Church</span>
                 </div>
-                <a class="nav-link more-icon-link" asp-area="" asp-controller="Menu" asp-action="Index">
-                    <img src="~/images/circle-user-solid-full (1).svg" alt="More" />
+                <a class="nav-link more-icon-link" asp-area="" asp-controller="Menu" asp-action="Index" aria-label="Open menu and account options">
+                    <img src="~/images/circle-user-solid-full (1).svg" alt="" aria-hidden="true" />
+                    <span class="visually-hidden">Menu</span>
                 </a>
             </div>
         </nav>
 
-        <!-- bottom navbar -->
-        <nav class="navbar navbar-dark bottom-navbar">
+        <nav class="navbar navbar-dark bottom-navbar" aria-label="Primary navigation">
             <div class="container-fluid">
                 <ul class="navbar-nav flex-row justify-content-around w-100 text-center">
                     <li class="nav-item">
-                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Sermons" asp-action="Index">
-                            <img src="~/images/sermons.svg" alt="Sermons" />
+                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Sermons" asp-action="Index" aria-label="Go to Sermons">
+                            <img src="~/images/sermons.svg" alt="" aria-hidden="true" />
                             <span>Sermons</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Events" asp-action="Index">
-                            <img src="~/images/events.svg" alt="Events" />
+                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Events" asp-action="Index" aria-label="Go to Events">
+                            <img src="~/images/events.svg" alt="" aria-hidden="true" />
                             <span>Events</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Connect" asp-action="Index">
-                            <img src="~/images/connect.svg" alt="Connect" />
+                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Connect" asp-action="Index" aria-label="Go to Connect">
+                            <img src="~/images/connect.svg" alt="" aria-hidden="true" />
                             <span>Connect</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Give" asp-action="Index">
-                            <img src="~/images/give.svg" alt="Give" />
+                        <a class="nav-link nav-icon-link" asp-area="" asp-controller="Give" asp-action="Index" aria-label="Go to Give">
+                            <img src="~/images/give.svg" alt="" aria-hidden="true" />
                             <span>Give</span>
                         </a>
                     </li>
@@ -72,8 +75,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container page-shell">
+        <main id="main-content" role="main" class="pb-3" tabindex="-1">
             @RenderBody()
         </main>
     </div>
@@ -82,23 +85,4 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
-<script>
-    document.querySelectorAll('.more-icon-link').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            if (!href || href === '#') return;
-
-            const iframe = document.createElement('iframe');
-            iframe.src = href;
-            iframe.classList.add('page-transition-overlay');
-            document.body.appendChild(iframe);
-
-            iframe.addEventListener('animationend', () => {
-                window.location.href = href;
-            });
-        });
-    });
-</script>
 </html>

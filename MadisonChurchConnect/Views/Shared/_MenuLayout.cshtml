@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Molly Gilchrist
     3/17/2026
     STG-456
@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] - Madison Church Connect</title>
+    <meta name="description" content="Madison Church Connect account, notes, and support views in an installable Progressive Web App." />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MadisonChurchConnect.styles.css" asp-append-version="true" />
@@ -22,9 +23,11 @@
     <meta name="apple-mobile-web-app-title" content="Madison Connect">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 </head>
-<body style="padding: 0; margin: 0; background-color: #FEFEFA; overflow: hidden;">
-    <div class="container">
-        <main role="main" class="pb-3">
+<body class="menu-layout-body">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="app-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="container page-shell">
+        <main id="main-content" role="main" class="pb-3" tabindex="-1">
             @RenderBody()
         </main>
     </div>

@@ -1,20 +1,26 @@
-﻿{
+{
   "name": "Madison Church Connect",
   "short_name": "MadisonConnect",
+  "description": "Madison Church sermons, events, notes, and connection tools in an installable Progressive Web App.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#4267B2",
+  "orientation": "portrait-primary",
+  "background_color": "#FEFEFA",
   "theme_color": "#4267B2",
+  "categories": ["lifestyle", "education", "productivity"],
   "icons": [
     {
       "src": "/images/apple-touch-icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/images/apple-touch-icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
