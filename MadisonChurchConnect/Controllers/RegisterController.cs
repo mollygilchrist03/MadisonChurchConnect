@@ -14,7 +14,7 @@ namespace MadisonChurchConnect.Controllers
     public class RegisterController : Controller
     {
         // class level variables
-        private UserLogic _userLogic;
+        private readonly UserLogic _userLogic;
 
         /// <summary>
         /// parameterized constructor
@@ -37,6 +37,7 @@ namespace MadisonChurchConnect.Controllers
         /// post method to process the registration form
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(UserViewModel user)
         {
             // return the form if the model state is invalid
