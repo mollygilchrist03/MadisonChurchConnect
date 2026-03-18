@@ -2,6 +2,7 @@ using MadisonChurchConnect.Services.BusinessLogic;
 using MadisonChurchConnect.Services.DataAccess;
 using MadisonChurchConnect.Services.Interfaces;
 using MadisonChurchConnect.Services.YouTube;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,10 @@ builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies.C
     {
         options.LoginPath = "/Login/Login";
     });
+
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\home\ASP.NET\DataProtection-Keys"))
+    .SetApplicationName("MadisonChurchConnect");
 
 var app = builder.Build();
 
