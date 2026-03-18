@@ -1,4 +1,4 @@
-﻿<!--
+<!--
     Molly Gilchrist
     3/17/2026
     STG-456
@@ -11,30 +11,30 @@
 <div class="auth-page">
     <div class="note-card">
         <div id="feedback-form-area">
-            <h2 class="page-title">Send Feedback</h2>
+            <h1 class="page-title">Send Feedback</h1>
             <p style="color: #555; font-size: 0.9rem; margin-bottom: 1.25rem;">
                 Have a suggestion or found something wrong? Let us know!
             </p>
+            <div id="feedback-error" class="text-danger mb-3" role="alert" hidden></div>
             <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" placeholder="Your name" id="feedback-name" />
+                <label class="form-label" for="feedback-name">Name</label>
+                <input type="text" class="form-control" placeholder="Your name" id="feedback-name" autocomplete="name" />
             </div>
             <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="Your email" id="feedback-email" />
+                <label class="form-label" for="feedback-email">Email</label>
+                <input type="email" class="form-control" placeholder="Your email" id="feedback-email" autocomplete="email" />
             </div>
             <div class="mb-3">
-                <label class="form-label">Message</label>
+                <label class="form-label" for="feedback-message">Message</label>
                 <textarea class="form-control" rows="5" placeholder="Your feedback..." id="feedback-message"></textarea>
             </div>
             <div class="note-actions">
-                <button class="btn-note-action" id="feedback-submit">Send Feedback</button>
+                <button class="btn-note-action" id="feedback-submit" type="button">Send Feedback</button>
             </div>
         </div>
-        <!-- confirmation shown after successful send -->
-        <div id="feedback-confirmation" style="display: none; text-align: center; padding: 1.5rem 0;">
-            <p style="font-size: 1.5rem; margin-bottom: 0.5rem;">✓</p>
-            <h3 style="color: #4267B2; margin-bottom: 0.5rem;">Thanks for your feedback!</h3>
+        <div id="feedback-confirmation" style="display: none; text-align: center; padding: 1.5rem 0;" role="status" aria-live="polite">
+            <p style="font-size: 1.5rem; margin-bottom: 0.5rem;" aria-hidden="true">✓</p>
+            <h2 style="color: #4267B2; margin-bottom: 0.5rem;">Thanks for your feedback!</h2>
             <p style="color: #555; font-size: 0.9rem;">
                 Your message has been sent successfully.
             </p>
@@ -51,20 +51,25 @@
             const name = document.getElementById('feedback-name').value.trim();
             const email = document.getElementById('feedback-email').value.trim();
             const message = document.getElementById('feedback-message').value.trim();
+            const errorRegion = document.getElementById('feedback-error');
+            const announceStatus = window.MadisonConnect?.announceStatus;
 
-            // make sure all fields are filled
+            errorRegion.hidden = true;
+            errorRegion.textContent = '';
+
             if (!name || !email || !message) {
-                alert('Please fill out all fields before submitting.');
+                errorRegion.hidden = false;
+                errorRegion.textContent = 'Please fill out all fields before submitting.';
+                announceStatus?.(errorRegion.textContent);
                 return;
             }
 
-            // disable button while sending
             const btn = document.getElementById('feedback-submit');
             btn.disabled = true;
             btn.textContent = 'Sending...';
+            announceStatus?.('Sending feedback.');
 
             try {
-                // post directly to web3forms from the browser
                 const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -80,16 +85,20 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    // hide the form and show confirmation
                     document.getElementById('feedback-form-area').style.display = 'none';
                     document.getElementById('feedback-confirmation').style.display = 'block';
+                    announceStatus?.('Feedback sent successfully.');
                 } else {
-                    alert(result.message || 'Failed to send. Please try again.');
+                    errorRegion.hidden = false;
+                    errorRegion.textContent = result.message || 'Failed to send. Please try again.';
+                    announceStatus?.(errorRegion.textContent);
                     btn.disabled = false;
                     btn.textContent = 'Send Feedback';
                 }
             } catch {
-                alert('Something went wrong. Please try again.');
+                errorRegion.hidden = false;
+                errorRegion.textContent = 'Something went wrong. Please try again.';
+                announceStatus?.(errorRegion.textContent);
                 btn.disabled = false;
                 btn.textContent = 'Send Feedback';
             }

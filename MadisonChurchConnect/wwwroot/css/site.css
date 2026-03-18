@@ -1175,3 +1175,76 @@ a.phone-number {
         color: #365899;
     }
 /* LOGIN AND REGISTER PAGE STYLING */
+
+
+/* ACCESSIBILITY + PWA SHARED STYLING */
+:root {
+    --mc-primary: #4267B2;
+    --mc-primary-dark: #27457d;
+    --mc-surface: #f8f9ff;
+    --mc-text: #1f2937;
+    --mc-focus: #ffbf47;
+}
+
+body {
+    color: var(--mc-text);
+}
+
+.page-shell {
+    padding-bottom: 6rem;
+}
+
+.menu-layout-body {
+    padding: 0;
+    margin: 0;
+    background-color: #FEFEFA;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 2000;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: #111827;
+    color: #fff;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid var(--mc-focus);
+    outline-offset: 3px;
+}
+
+.nav-link:focus-visible,
+.btn-note-action:focus-visible,
+.all-sermons-btn:focus-visible,
+.sermon-watch-button:focus-visible,
+.sermon-visit-button:focus-visible,
+.map-button:focus-visible,
+.social-links-btn:focus-visible,
+.connect-btn:focus-visible,
+.create-note-btn:focus-visible,
+.more-row:focus-visible,
+.auth-back-link:focus-visible {
+    box-shadow: 0 0 0 4px rgba(255, 191, 71, 0.35);
+    border-radius: 0.75rem;
+}
+
+img[aria-hidden="true"] {
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
