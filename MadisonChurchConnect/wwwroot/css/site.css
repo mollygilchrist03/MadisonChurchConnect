@@ -50,9 +50,9 @@ html {
 
 html[data-theme='dark'] {
     color-scheme: dark;
-    --mc-primary: #7fa8ff;
-    --mc-primary-dark: #a9c1ff;
-    --mc-primary-soft: rgba(127, 168, 255, 0.18);
+    --mc-primary: #2C4577;
+    --mc-primary-dark: #23385f;
+    --mc-primary-soft: rgba(44, 69, 119, 0.24);
     --mc-page-bg: #111827;
     --mc-surface: #1f2937;
     --mc-surface-strong: #273449;
