@@ -92,7 +92,9 @@
         <div class="more-row more-row-static">
             <img src="~/images/circle-info-solid-full.svg" alt="About" class="more-row-icon" />
             <span>Version</span>
-            <span class="more-row-value">1.0.0</span>
+            <span class="more-row-value">
+                @System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3)
+            </span>
         </div>
     </div>
 
