@@ -1344,6 +1344,10 @@ a.phone-number {
     padding: 1rem 0;
 }
 
+.auth-page-centered {
+    min-height: calc(100vh - 2rem);
+}
+
 .auth-back-link {
     display: block;
     text-align: center;
