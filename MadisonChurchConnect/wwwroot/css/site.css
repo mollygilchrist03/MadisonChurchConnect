@@ -149,14 +149,19 @@ body {
     display: flex;
     align-items: center;
     padding: 0.5rem;
+    color: #ffffff;
 }
 
     .more-icon-link .more-icon {
         height: 30px;
         width: 30px;
         margin-bottom: 4px;
-        fill: #ffffff;
         flex-shrink: 0;
+    }
+
+    .more-icon-link .more-icon,
+    .more-icon-link .more-icon path {
+        fill: currentColor;
     }
 
     .notes-icon-link img {
@@ -1164,17 +1169,8 @@ a.phone-number {
 }
 
 .more-icon-link {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
+    color: #ffffff;
 }
-
-    .more-icon-link img {
-        height: 30px;
-        width: 30px;
-        margin-bottom: 4px;
-        filter: var(--mc-nav-icon-filter);
-    }
 
 .icon-flip {
     transform: scaleX(-1);
