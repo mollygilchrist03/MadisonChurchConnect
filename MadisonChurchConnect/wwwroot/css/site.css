@@ -1441,6 +1441,10 @@ img[aria-hidden="true"] {
         filter: brightness(0) invert(1);
     }
 
+    .more-row-icon {
+        filter: brightness(0) invert(1);
+    }
+
     .skip-link {
         background: #f0f0f0;
         color: #1e2130;
@@ -1683,6 +1687,10 @@ img[aria-hidden="true"] {
 }
 
 [data-theme="dark"] .menu-back-icon {
+    filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .more-row-icon {
     filter: brightness(0) invert(1);
 }
 

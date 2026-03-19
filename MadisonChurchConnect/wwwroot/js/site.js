@@ -3,6 +3,88 @@
 
 (function () {
     const statusRegion = document.getElementById('app-status');
+    const themeStorageKey = 'madison-theme';
+    const darkThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function getStoredTheme() {
+        try {
+            return window.localStorage.getItem(themeStorageKey);
+        } catch {
+            return null;
+        }
+    }
+
+    function storeTheme(theme) {
+        try {
+            if (theme) {
+                window.localStorage.setItem(themeStorageKey, theme);
+            } else {
+                window.localStorage.removeItem(themeStorageKey);
+            }
+        } catch {
+            // Ignore storage failures and fall back to system preference.
+        }
+    }
+
+    function getPreferredTheme() {
+        const storedTheme = getStoredTheme();
+        if (storedTheme === 'dark' || storedTheme === 'light') {
+            return storedTheme;
+        }
+
+        return darkThemeMediaQuery.matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+        const normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+        const root = document.documentElement;
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        const appleStatusBarMeta = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
+        const isDark = normalizedTheme === 'dark';
+
+        root.dataset.theme = normalizedTheme;
+        root.style.colorScheme = normalizedTheme;
+
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', isDark ? '#121212' : '#4267B2');
+        }
+
+        if (appleStatusBarMeta) {
+            appleStatusBarMeta.setAttribute('content', isDark ? 'black-translucent' : 'default');
+        }
+
+        document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+            const icon = button.querySelector('[data-theme-toggle-icon]');
+            const label = button.querySelector('[data-theme-toggle-label]');
+            const value = button.querySelector('[data-theme-toggle-value]');
+            const nextTheme = isDark ? 'light' : 'dark';
+            const nextLabel = isDark ? 'Light Mode' : 'Dark Mode';
+            const currentLabel = isDark ? 'Dark' : 'Light';
+
+            button.setAttribute('aria-pressed', String(isDark));
+            button.setAttribute('aria-label', `Switch to ${nextLabel}`);
+            button.dataset.nextTheme = nextTheme;
+
+            if (icon) {
+                icon.setAttribute('src', isDark ? '/images/sun-solid-full.svg' : '/images/moon-solid-full.svg');
+            }
+
+            if (label) {
+                label.textContent = nextLabel;
+            }
+
+            if (value) {
+                value.textContent = currentLabel;
+            }
+        });
+    }
+
+    function toggleTheme() {
+        const nextTheme = getPreferredTheme() === 'dark' ? 'light' : 'dark';
+        storeTheme(nextTheme);
+        applyTheme(nextTheme);
+        announceStatus(`Theme changed to ${nextTheme} mode.`);
+    }
 
     function announceStatus(message) {
         if (!statusRegion || !message) {
@@ -17,6 +99,24 @@
 
     window.MadisonConnect = window.MadisonConnect || {};
     window.MadisonConnect.announceStatus = announceStatus;
+    window.MadisonConnect.applyTheme = applyTheme;
+    window.MadisonConnect.toggleTheme = toggleTheme;
+
+    applyTheme(getPreferredTheme());
+
+    if (typeof darkThemeMediaQuery.addEventListener === 'function') {
+        darkThemeMediaQuery.addEventListener('change', (event) => {
+            if (getStoredTheme()) {
+                return;
+            }
+
+            applyTheme(event.matches ? 'dark' : 'light');
+        });
+    }
+
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+        button.addEventListener('click', toggleTheme);
+    });
 
     document.querySelectorAll('.more-icon-link').forEach((link) => {
         link.addEventListener('click', function (e) {
