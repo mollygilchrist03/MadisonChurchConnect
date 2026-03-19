@@ -1,4 +1,4 @@
-const CACHE_NAME = 'madison-connect-v2';
+const CACHE_NAME = 'madison-connect-v3';
 const APP_SHELL = [
     '/',
     '/manifest.json',

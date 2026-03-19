@@ -8,6 +8,26 @@
     const darkThemeName = 'dark';
     const lightThemeName = 'light';
 
+    function getStoredTheme() {
+        try {
+            return window.localStorage.getItem(themeStorageKey);
+        } catch {
+            return null;
+        }
+    }
+
+    function persistTheme(theme) {
+        try {
+            window.localStorage.setItem(themeStorageKey, theme);
+        } catch {
+            return;
+        }
+    }
+
+    function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkThemeName : lightThemeName;
+    }
+
     function announceStatus(message) {
         if (!statusRegion || !message) {
             return;
@@ -20,13 +40,13 @@
     }
 
     function getPreferredTheme() {
-        const storedTheme = window.localStorage.getItem(themeStorageKey);
+        const storedTheme = getStoredTheme();
 
         if (storedTheme === darkThemeName || storedTheme === lightThemeName) {
             return storedTheme;
         }
 
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? darkThemeName : lightThemeName;
+        return getSystemTheme();
     }
 
     function updateThemeToggle(theme) {
@@ -55,7 +75,7 @@
         updateThemeToggle(theme);
 
         if (shouldPersist) {
-            window.localStorage.setItem(themeStorageKey, theme);
+            persistTheme(theme);
         }
     }
 
@@ -72,13 +92,19 @@
     }
 
     const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    colorSchemeQuery.addEventListener('change', (event) => {
-        if (window.localStorage.getItem(themeStorageKey)) {
+    const handleColorSchemeChange = (event) => {
+        if (getStoredTheme()) {
             return;
         }
 
         applyTheme(event.matches ? darkThemeName : lightThemeName, false);
-    });
+    };
+
+    if (typeof colorSchemeQuery.addEventListener === 'function') {
+        colorSchemeQuery.addEventListener('change', handleColorSchemeChange);
+    } else if (typeof colorSchemeQuery.addListener === 'function') {
+        colorSchemeQuery.addListener(handleColorSchemeChange);
+    }
 
     window.MadisonConnect = window.MadisonConnect || {};
     window.MadisonConnect.announceStatus = announceStatus;

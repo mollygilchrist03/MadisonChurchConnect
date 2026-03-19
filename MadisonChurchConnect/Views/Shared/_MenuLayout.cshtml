@@ -22,6 +22,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Madison Connect">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <script>
+        (function () {
+            const themeStorageKey = 'madison-connect-theme';
+            const darkThemeName = 'dark';
+            const lightThemeName = 'light';
+
+            function getStoredTheme() {
+                try {
+                    return window.localStorage.getItem(themeStorageKey);
+                } catch {
+                    return null;
+                }
+            }
+
+            const storedTheme = getStoredTheme();
+            const preferredTheme = storedTheme === darkThemeName || storedTheme === lightThemeName
+                ? storedTheme
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? darkThemeName : lightThemeName);
+
+            document.documentElement.setAttribute('data-theme', preferredTheme);
+        })();
+    </script>
 </head>
 <body class="menu-layout-body">
     <a class="skip-link" href="#main-content">Skip to main content</a>
