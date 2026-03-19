@@ -57,8 +57,8 @@ html {
     --mc-event-pill-bg-strong: rgba(66, 103, 178, 0.15);
     --mc-focus-shadow: rgba(255, 191, 71, 0.20);
     --mc-skip-link-bg: #111827;
-    --mc-nav-icon-filter: brightness(0) invert(1);
-    --mc-menu-back-filter: brightness(0) invert(1);
+    --mc-nav-icon-filter: brightness(0) invert(0);
+    --mc-menu-back-filter: brightness(0) invert(0);
 }
 
 html[data-theme='dark'] {
