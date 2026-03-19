@@ -149,7 +149,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0.5rem;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
     .more-icon-link .more-icon {
@@ -157,19 +157,20 @@ body {
         width: 30px;
         margin-bottom: 4px;
         flex-shrink: 0;
+        filter: none !important;
+        fill: #ffffff !important;
     }
 
-    .more-icon-link .more-icon,
-    .more-icon-link .more-icon path {
-        fill: currentColor;
-    }
+        .more-icon-link .more-icon path {
+            fill: #ffffff !important;
+        }
 
-    .notes-icon-link img {
-        height: 30px;
-        width: 30px;
-        margin-bottom: 4px;
-        filter: var(--mc-nav-icon-filter);
-    }
+.notes-icon-link img {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 4px;
+    filter: var(--mc-nav-icon-filter);
+}
 
 .bottom-navbar {
     position: fixed;
@@ -1168,10 +1169,6 @@ a.phone-number {
     margin: 0 1rem;
 }
 
-.more-icon-link {
-    color: #ffffff;
-}
-
 .icon-flip {
     transform: scaleX(-1);
 }
@@ -1271,9 +1268,9 @@ a.phone-number {
     justify-content: space-between;
 }
 
-.more-theme-toggle:hover {
-    background-color: var(--mc-primary-soft);
-}
+    .more-theme-toggle:hover {
+        background-color: var(--mc-primary-soft);
+    }
 /* THEME TOGGLE STYLING */
 
 /* ACCESSIBILITY + PWA SHARED STYLING */
