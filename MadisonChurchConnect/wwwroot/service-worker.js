@@ -1,4 +1,4 @@
-const CACHE_NAME = 'madison-connect-v3';
+const CACHE_NAME = 'madison-connect-v4';
 const APP_SHELL = [
     '/',
     '/manifest.json',
@@ -16,14 +16,12 @@ const CACHE_EXCLUDED = [
     '/Sermons',
     '/Feedback'
 ];
-
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
     );
     self.skipWaiting();
 });
-
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => Promise.all(
@@ -32,7 +30,6 @@ self.addEventListener('activate', (event) => {
     );
     self.clients.claim();
 });
-
 self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') {
         return;
@@ -42,6 +39,20 @@ self.addEventListener('fetch', (event) => {
         event.respondWith(fetch(event.request));
         return;
     }
+    // Network-first for CSS and JS so updates are always picked up
+    if (url.pathname.endsWith('.css') || url.pathname.endsWith('.js')) {
+        event.respondWith(
+            fetch(event.request)
+                .then((networkResponse) => {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+                    return networkResponse;
+                })
+                .catch(() => caches.match(event.request))
+        );
+        return;
+    }
+    // Cache-first for everything else (images, fonts, etc.)
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             if (cachedResponse) {

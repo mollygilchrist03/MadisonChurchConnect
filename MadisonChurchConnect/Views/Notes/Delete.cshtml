@@ -13,7 +13,7 @@
 
 <div class="auth-page">
     <div class="note-card">
-        <h2 class="page-title" style="color: #d32f2f;">Delete Note?</h2>
+        <h2 class="page-title" style="color: var(--mc-danger);">Delete Note?</h2>
         <p class="mb-4">Are you sure you want to permanently delete <strong>"@Model.NoteTitle"</strong>?</p>
 
         <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
@@ -26,8 +26,8 @@
         <form asp-action="Delete" method="post">
             <input type="hidden" asp-for="NoteId" />
             <div class="note-actions">
-                <button type="submit" class="btn-note-action" style="background-color: #d32f2f;">Yes, Delete</button>
-                <a asp-action="Index" class="btn-note-action" style="background-color: #757575; text-align:center; text-decoration: none;">Cancel</a>
+                <button type="submit" class="btn-note-action" style="background-color: var(--mc-danger);">Yes, Delete</button>
+                <a asp-action="Index" class="btn-note-action" style="background-color: var(--mc-secondary); text-align:center; text-decoration: none;">Cancel</a>
             </div>
         </form>
     </div>
