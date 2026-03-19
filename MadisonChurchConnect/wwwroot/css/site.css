@@ -1212,9 +1212,9 @@ body {
     text-decoration: none;
 }
 
-.skip-link:focus {
-    top: 1rem;
-}
+    .skip-link:focus {
+        top: 1rem;
+    }
 
 :focus-visible {
     outline: 3px solid var(--mc-focus);
