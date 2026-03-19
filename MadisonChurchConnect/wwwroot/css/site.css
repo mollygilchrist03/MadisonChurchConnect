@@ -1248,3 +1248,495 @@ img[aria-hidden="true"] {
         scroll-behavior: auto !important;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --mc-primary: #6b93e0;
+        --mc-primary-dark: #4a6fba;
+        --mc-surface: #1e2130;
+        --mc-text: #e8eaf0;
+    }
+
+    body,
+    .menu-layout-body {
+        background-color: #121212;
+        color: #e8eaf0;
+    }
+
+    .top-icon-bar, .bottom-navbar,
+    .all-sermons-btn,
+    .sermon-watch-button,
+    .sermon-info-button,
+    .sermon-visit-button,
+    .map-button,
+    .social-links-btn,
+    .create-note-btn,
+    .btn-note-action,
+    .icon-header {
+        background-color: #6b93e0;
+    }
+
+    .sermon-watch-button:hover,
+    .sermon-info-button:hover,
+    .sermon-visit-button:hover,
+    .btn-note-action:hover {
+        background-color: #5580cc;
+        color: #1e2130;
+    }
+
+    .auth-back-link:hover {
+        color: #5580cc;
+    }
+
+    .top-nav-text,
+    .nav-icon-link,
+    .all-sermons-btn,
+    .all-sermons-btn:visited,
+    .sermon-watch-button,
+    .sermon-info-button,
+    .sermon-visit-button,
+    .map-button,
+    .map-button:link,
+    .map-button:visited,
+    .map-button:hover,
+    .map-button:active,
+    .social-links-btn,
+    .social-links-btn:link,
+    .social-links-btn:visited,
+    .social-links-btn:hover,
+    .social-links-btn:active,
+    .create-note-btn,
+    .create-note-btn:visited,
+    .btn-note-action,
+    .auth-back-link,
+    .calendar-icon,
+    .page-title,
+    .delete-confirmation h2,
+    .note-details dt,
+    .more-section-label,
+    .more-row-chevron,
+    .church-phone a,
+    .church-phone:link,
+    .church-phone:visited,
+    .church-phone:hover,
+    .church-phone:active,
+    .series-heading,
+    .event-info-card h3 {
+        color: #6b93e0;
+    }
+
+    .sermon-info-card,
+    .all-sermons-header,
+    .calendar-card,
+    .event-info-card,
+    .church-info,
+    .connect-actions a.connect-btn,
+    .notes-list .note-card,
+    .note-card,
+    .more-section {
+        background-color: #1e2130;
+    }
+
+    .sermon-card,
+    .series-card,
+    .series-video-row,
+    .note-details {
+        background-color: #1e2130;
+    }
+
+    .sermon-info-card,
+    .all-sermons-header,
+    .sermon-card,
+    .series-card,
+    .series-video-row,
+    .calendar-card,
+    .event-info-card,
+    .church-info,
+    .connect-actions a.connect-btn,
+    .notes-list .note-card,
+    .note-details,
+    .note-card,
+    .more-section {
+        border-color: #4a6fa5;
+    }
+
+    .sermon-info-card p,
+    .pastor-note .pastor-name,
+    .all-sermons p,
+    .connect-actions a.connect-btn,
+    .more-row,
+    .logo-text-header p {
+        color: #e8eaf0;
+    }
+
+    .sermon-card-content h3,
+    .series-card-content h2,
+    .series-video-meta h2 {
+        color: #a8bce8;
+    }
+
+    .sermon-card-content p,
+    .series-card-content p,
+    .series-video-meta p,
+    .event-info-card p,
+    .note-details dd,
+    .notes-list .note-preview {
+        color: #9aa2b4;
+    }
+
+    .calendar-subtitle,
+    .notes-list .note-date,
+    .empty-state {
+        color: #8a94a8;
+    }
+
+    .notes-list .note-title,
+    .note-view-card p {
+        color: #d4d8e2;
+    }
+
+    .delete-confirmation h3 {
+        color: #ef5350;
+    }
+
+    .notes-list .btn-delete-corner,
+    .delete-confirmation .btn-danger {
+        background-color: #ef5350;
+        color: #1e2130;
+    }
+
+    .notes-list .btn-delete-corner:hover,
+    .delete-confirmation .btn-danger:hover {
+        background-color: #c62828;
+    }
+
+    .delete-confirmation .btn-secondary {
+        background-color: #9e9e9e;
+        color: #1e2130;
+    }
+
+    .delete-confirmation .btn-secondary:hover {
+        background-color: #888888;
+    }
+
+    .note-view-card .form-label,
+    .auth-back-link {
+        color: #6b93e0;
+    }
+
+    .note-view-card .note-actions {
+        border-top-color: #2e3550;
+    }
+
+    .more-row-value,
+    .more-row-note {
+        color: #7a8499;
+    }
+
+    .more-row-divider {
+        background-color: #2e3550;
+    }
+
+    .menu-back-icon {
+        filter: brightness(0) invert(1);
+    }
+
+    .skip-link {
+        background: #f0f0f0;
+        color: #1e2130;
+    }
+
+    .event-icon-wrapper.study {
+        background-color: rgba(107, 147, 224, 0.20);
+    }
+
+    .event-icon-wrapper.kids {
+        background-color: rgba(255, 183, 77, 0.25);
+    }
+
+    .event-icon-wrapper.women {
+        background-color: rgba(186, 104, 200, 0.25);
+    }
+
+    .event-icon-wrapper.community {
+        background-color: rgba(76, 175, 80, 0.25);
+    }
+
+    .event-icon-wrapper.youth {
+        background-color: rgba(33, 150, 243, 0.25);
+    }
+
+    .event-icon-wrapper.sports {
+        background-color: rgba(255, 87, 34, 0.25);
+    }
+
+    .event-icon-wrapper.young-adults {
+        background-color: rgba(0, 188, 212, 0.25);
+    }
+
+    .event-icon-wrapper.creative {
+        background-color: rgba(233, 30, 99, 0.22);
+    }
+
+    .event-day,
+    .event-time {
+        color: #6b93e0;
+    }
+
+    .event-day {
+        background-color: rgba(107, 147, 224, 0.18);
+    }
+
+    .event-time {
+        background-color: rgba(107, 147, 224, 0.22);
+    }
+
+    .notes-list .note-card:hover {
+        border-color: #6b93e0;
+        box-shadow: 0 2px 8px rgba(107, 147, 224, 0.22);
+    }
+}
+
+[data-theme="dark"] {
+    --mc-primary: #6b93e0;
+    --mc-primary-dark: #4a6fba;
+    --mc-surface: #1e2130;
+    --mc-text: #e8eaf0;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"].menu-layout-body,
+[data-theme="dark"] .menu-layout-body {
+    background-color: #121212;
+    color: #e8eaf0;
+}
+
+[data-theme="dark"] .top-icon-bar, [data-theme="dark"] .bottom-navbar,
+[data-theme="dark"] .all-sermons-btn,
+[data-theme="dark"] .sermon-watch-button,
+[data-theme="dark"] .sermon-info-button,
+[data-theme="dark"] .sermon-visit-button,
+[data-theme="dark"] .map-button,
+[data-theme="dark"] .social-links-btn,
+[data-theme="dark"] .create-note-btn,
+[data-theme="dark"] .btn-note-action,
+[data-theme="dark"] .icon-header {
+    background-color: #6b93e0;
+}
+
+[data-theme="dark"] .sermon-watch-button:hover,
+[data-theme="dark"] .sermon-info-button:hover,
+[data-theme="dark"] .sermon-visit-button:hover,
+[data-theme="dark"] .btn-note-action:hover {
+    background-color: #5580cc;
+    color: #1e2130;
+}
+
+[data-theme="dark"] .auth-back-link:hover {
+    color: #5580cc;
+}
+
+[data-theme="dark"] .top-nav-text,
+[data-theme="dark"] .nav-icon-link,
+[data-theme="dark"] .all-sermons-btn,
+[data-theme="dark"] .all-sermons-btn:visited,
+[data-theme="dark"] .sermon-watch-button,
+[data-theme="dark"] .sermon-info-button,
+[data-theme="dark"] .sermon-visit-button,
+[data-theme="dark"] .map-button,
+[data-theme="dark"] .map-button:link,
+[data-theme="dark"] .map-button:visited,
+[data-theme="dark"] .map-button:hover,
+[data-theme="dark"] .map-button:active,
+[data-theme="dark"] .social-links-btn,
+[data-theme="dark"] .social-links-btn:link,
+[data-theme="dark"] .social-links-btn:visited,
+[data-theme="dark"] .social-links-btn:hover,
+[data-theme="dark"] .social-links-btn:active,
+[data-theme="dark"] .create-note-btn,
+[data-theme="dark"] .create-note-btn:visited,
+[data-theme="dark"] .btn-note-action,
+[data-theme="dark"] .auth-back-link,
+[data-theme="dark"] .calendar-icon,
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .delete-confirmation h2,
+[data-theme="dark"] .note-details dt,
+[data-theme="dark"] .more-section-label,
+[data-theme="dark"] .more-row-chevron,
+[data-theme="dark"] .church-phone a,
+[data-theme="dark"] .church-phone:link,
+[data-theme="dark"] .church-phone:visited,
+[data-theme="dark"] .church-phone:hover,
+[data-theme="dark"] .church-phone:active,
+[data-theme="dark"] .series-heading,
+[data-theme="dark"] .event-info-card h3 {
+    color: #6b93e0;
+}
+
+[data-theme="dark"] .sermon-info-card,
+[data-theme="dark"] .all-sermons-header,
+[data-theme="dark"] .calendar-card,
+[data-theme="dark"] .event-info-card,
+[data-theme="dark"] .church-info,
+[data-theme="dark"] .connect-actions a.connect-btn,
+[data-theme="dark"] .notes-list .note-card,
+[data-theme="dark"] .note-card,
+[data-theme="dark"] .more-section,
+[data-theme="dark"] .sermon-card,
+[data-theme="dark"] .series-card,
+[data-theme="dark"] .series-video-row,
+[data-theme="dark"] .note-details {
+    background-color: #1e2130;
+}
+
+[data-theme="dark"] .sermon-info-card,
+[data-theme="dark"] .all-sermons-header,
+[data-theme="dark"] .sermon-card,
+[data-theme="dark"] .series-card,
+[data-theme="dark"] .series-video-row,
+[data-theme="dark"] .calendar-card,
+[data-theme="dark"] .event-info-card,
+[data-theme="dark"] .church-info,
+[data-theme="dark"] .connect-actions a.connect-btn,
+[data-theme="dark"] .notes-list .note-card,
+[data-theme="dark"] .note-details,
+[data-theme="dark"] .note-card,
+[data-theme="dark"] .more-section {
+    border-color: #4a6fa5;
+}
+
+[data-theme="dark"] .sermon-info-card p,
+[data-theme="dark"] .pastor-note .pastor-name,
+[data-theme="dark"] .all-sermons p,
+[data-theme="dark"] .connect-actions a.connect-btn,
+[data-theme="dark"] .more-row,
+[data-theme="dark"] .logo-text-header p {
+    color: #e8eaf0;
+}
+
+[data-theme="dark"] .sermon-card-content h3,
+[data-theme="dark"] .series-card-content h2,
+[data-theme="dark"] .series-video-meta h2 {
+    color: #a8bce8;
+}
+
+[data-theme="dark"] .sermon-card-content p,
+[data-theme="dark"] .series-card-content p,
+[data-theme="dark"] .series-video-meta p,
+[data-theme="dark"] .event-info-card p,
+[data-theme="dark"] .note-details dd,
+[data-theme="dark"] .notes-list .note-preview {
+    color: #9aa2b4;
+}
+
+[data-theme="dark"] .calendar-subtitle,
+[data-theme="dark"] .notes-list .note-date,
+[data-theme="dark"] .empty-state {
+    color: #8a94a8;
+}
+
+[data-theme="dark"] .notes-list .note-title,
+[data-theme="dark"] .note-view-card p {
+    color: #d4d8e2;
+}
+
+[data-theme="dark"] .delete-confirmation h3 {
+    color: #ef5350;
+}
+
+[data-theme="dark"] .notes-list .btn-delete-corner,
+[data-theme="dark"] .delete-confirmation .btn-danger {
+    background-color: #ef5350;
+    color: #1e2130;
+}
+
+[data-theme="dark"] .notes-list .btn-delete-corner:hover,
+[data-theme="dark"] .delete-confirmation .btn-danger:hover {
+    background-color: #c62828;
+}
+
+[data-theme="dark"] .delete-confirmation .btn-secondary {
+    background-color: #9e9e9e;
+    color: #1e2130;
+}
+
+[data-theme="dark"] .delete-confirmation .btn-secondary:hover {
+    background-color: #888888;
+}
+
+[data-theme="dark"] .note-view-card .form-label,
+[data-theme="dark"] .auth-back-link {
+    color: #6b93e0;
+}
+
+[data-theme="dark"] .note-view-card .note-actions {
+    border-top-color: #2e3550;
+}
+
+[data-theme="dark"] .more-row-value,
+[data-theme="dark"] .more-row-note {
+    color: #7a8499;
+}
+
+[data-theme="dark"] .more-row-divider {
+    background-color: #2e3550;
+}
+
+[data-theme="dark"] .menu-back-icon {
+    filter: brightness(0) invert(1);
+}
+
+[data-theme="dark"] .skip-link {
+    background: #f0f0f0;
+    color: #1e2130;
+}
+
+[data-theme="dark"] .event-icon-wrapper.study {
+    background-color: rgba(107, 147, 224, 0.20);
+}
+
+[data-theme="dark"] .event-icon-wrapper.kids {
+    background-color: rgba(255, 183, 77, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.women {
+    background-color: rgba(186, 104, 200, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.community {
+    background-color: rgba(76, 175, 80, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.youth {
+    background-color: rgba(33, 150, 243, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.sports {
+    background-color: rgba(255, 87, 34, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.young-adults {
+    background-color: rgba(0, 188, 212, 0.25);
+}
+
+[data-theme="dark"] .event-icon-wrapper.creative {
+    background-color: rgba(233, 30, 99, 0.22);
+}
+
+[data-theme="dark"] .event-day,
+[data-theme="dark"] .event-time {
+    color: #6b93e0;
+}
+
+[data-theme="dark"] .event-day {
+    background-color: rgba(107, 147, 224, 0.18);
+}
+
+[data-theme="dark"] .event-time {
+    background-color: rgba(107, 147, 224, 0.22);
+}
+
+[data-theme="dark"] .notes-list .note-card:hover {
+    border-color: #6b93e0;
+    box-shadow: 0 2px 8px rgba(107, 147, 224, 0.22);
+}
