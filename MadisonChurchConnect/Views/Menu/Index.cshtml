@@ -63,6 +63,12 @@
 
     <div class="more-section-label">General</div>
     <div class="more-section">
+        <button type="button" class="more-row more-row-btn more-theme-toggle" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
+            <img src="~/images/palette-solid-full.svg" alt="" aria-hidden="true" class="more-row-icon" />
+            <span>Theme</span>
+            <span class="more-row-value theme-toggle-text">Light</span>
+        </button>
+        <div class="more-row-divider"></div>
         <a asp-controller="Feedback" asp-action="Index" class="more-row">
             <img src="~/images/comment-dots-solid-full.svg" alt="" aria-hidden="true" class="more-row-icon" />
             <span>Send Feedback</span>
