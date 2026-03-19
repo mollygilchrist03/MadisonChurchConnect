@@ -152,6 +152,15 @@ html[data-theme='dark'] {
         color: #ffffff;
     }
 
+    html[data-theme='dark'] .event-info-card h3 {
+        color: var(--mc-heading);
+    }
+
+    html[data-theme='dark'] .event-day,
+    html[data-theme='dark'] .event-time {
+        color: var(--mc-heading);
+    }
+
 .btn-note-cancel {
     background-color: var(--mc-secondary) !important;
     color: #ffffff !important;
@@ -537,6 +546,7 @@ body {
 .event-card-icon {
     height: 24px;
     width: 24px;
+    filter: var(--mc-nav-icon-filter);
 }
 
 /* calendar card with icon header */
@@ -561,6 +571,7 @@ body {
     height: 40px;
     color: var(--mc-primary);
     flex-shrink: 0;
+    filter: var(--mc-nav-icon-filter);
 }
 
 .calendar-card h3 {
