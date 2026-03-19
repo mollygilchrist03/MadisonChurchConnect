@@ -63,9 +63,9 @@ html {
 
 html[data-theme='dark'] {
     color-scheme: dark;
-    --mc-primary: #6b93e0;
-    --mc-primary-dark: #4a6fba;
-    --mc-primary-soft: #2e3550;
+    --mc-primary: #2C4577;
+    --mc-primary-dark: #1f3156;
+    --mc-primary-soft: #24304a;
     --mc-page-bg: #121212;
     --mc-surface: #1F2937;
     --mc-surface-strong: #1e2130;
@@ -80,9 +80,9 @@ html[data-theme='dark'] {
     --mc-danger-dark: #c62828;
     --mc-secondary: #9e9e9e;
     --mc-secondary-dark: #888888;
-    --mc-shadow: rgba(107, 147, 224, 0.22);
+    --mc-shadow: rgba(44, 69, 119, 0.28);
     --mc-on-accent: #1e2130;
-    --mc-study-bg: rgba(107, 147, 224, 0.20);
+    --mc-study-bg: rgba(44, 69, 119, 0.24);
     --mc-kids-bg: rgba(255, 183, 77, 0.25);
     --mc-women-bg: rgba(186, 104, 200, 0.25);
     --mc-community-bg: rgba(76, 175, 80, 0.25);
@@ -90,8 +90,8 @@ html[data-theme='dark'] {
     --mc-sports-bg: rgba(255, 87, 34, 0.25);
     --mc-young-adults-bg: rgba(0, 188, 212, 0.25);
     --mc-creative-bg: rgba(233, 30, 99, 0.22);
-    --mc-event-pill-bg: rgba(107, 147, 224, 0.18);
-    --mc-event-pill-bg-strong: rgba(107, 147, 224, 0.22);
+    --mc-event-pill-bg: rgba(44, 69, 119, 0.20);
+    --mc-event-pill-bg-strong: rgba(44, 69, 119, 0.28);
     --mc-focus-shadow: rgba(255, 191, 71, 0.25);
     --mc-skip-link-bg: #f0f0f0;
     --mc-nav-icon-filter: brightness(0) invert(1);
