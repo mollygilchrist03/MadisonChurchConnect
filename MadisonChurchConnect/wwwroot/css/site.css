@@ -145,6 +145,19 @@ body {
     padding: 0.5rem;
 }
 
+.more-icon-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+    .more-icon-link img {
+        height: 30px;
+        width: 30px;
+        margin-bottom: 4px;
+        filter: brightness(0) invert(1);
+    }
+
     .notes-icon-link img {
         height: 30px;
         width: 30px;
