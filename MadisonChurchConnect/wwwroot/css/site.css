@@ -161,6 +161,35 @@ html[data-theme='dark'] {
         color: var(--mc-heading);
     }
 
+    /* Connect page dark mode fixes */
+    html[data-theme='dark'] .church-info img,
+    html[data-theme='dark'] .connect-actions a.connect-btn img {
+        filter: brightness(0) invert(1);
+    }
+
+    html[data-theme='dark'] .church-phone a {
+        color: var(--mc-heading);
+    }
+
+    html[data-theme='dark'] .social-links img {
+        filter: brightness(0) invert(1);
+    }
+
+    html[data-theme='dark'] .social-links-btn {
+        color: #ffffff;
+    }
+
+    html[data-theme='dark'] .map-button {
+        color: #ffffff;
+    }
+
+        html[data-theme='dark'] .map-button:link,
+        html[data-theme='dark'] .map-button:visited,
+        html[data-theme='dark'] .map-button:hover,
+        html[data-theme='dark'] .map-button:active {
+            color: #ffffff;
+        }
+
 .btn-note-cancel {
     background-color: var(--mc-secondary) !important;
     color: #ffffff !important;
