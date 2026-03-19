@@ -16,7 +16,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem var(--mc-surface-strong), 0 0 0 0.25rem #258cfb;
 }
 
 html {
@@ -44,30 +44,56 @@ html {
     --mc-secondary: #757575;
     --mc-secondary-dark: #616161;
     --mc-shadow: rgba(66, 103, 178, 0.15);
+    --mc-on-accent: #ffffff;
+    --mc-study-bg: rgba(66, 103, 178, 0.12);
+    --mc-kids-bg: rgba(255, 183, 77, 0.20);
+    --mc-women-bg: rgba(186, 104, 200, 0.15);
+    --mc-community-bg: rgba(76, 175, 80, 0.15);
+    --mc-youth-bg: rgba(33, 150, 243, 0.15);
+    --mc-sports-bg: rgba(255, 87, 34, 0.15);
+    --mc-young-adults-bg: rgba(0, 188, 212, 0.15);
+    --mc-creative-bg: rgba(233, 30, 99, 0.12);
+    --mc-event-pill-bg: rgba(66, 103, 178, 0.10);
+    --mc-event-pill-bg-strong: rgba(66, 103, 178, 0.15);
+    --mc-focus-shadow: rgba(255, 191, 71, 0.20);
+    --mc-skip-link-bg: #111827;
     --mc-nav-icon-filter: brightness(0) invert(1);
-    --mc-menu-back-filter: brightness(0) invert(0);
+    --mc-menu-back-filter: brightness(0) invert(1);
 }
 
 html[data-theme='dark'] {
     color-scheme: dark;
-    --mc-primary: #2C4577;
-    --mc-primary-dark: #23385f;
-    --mc-primary-soft: rgba(44, 69, 119, 0.24);
-    --mc-page-bg: #111827;
-    --mc-surface: #1f2937;
-    --mc-surface-strong: #273449;
-    --mc-text: #f3f4f6;
-    --mc-text-muted: #d1d5db;
-    --mc-text-subtle: #9ca3af;
-    --mc-heading: #f9fafb;
-    --mc-border: #5f7fb8;
-    --mc-border-soft: #334155;
-    --mc-focus: #fbbf24;
+    --mc-primary: #6b93e0;
+    --mc-primary-dark: #4a6fba;
+    --mc-primary-soft: #2e3550;
+    --mc-page-bg: #121212;
+    --mc-surface: #3B4E68;
+    --mc-surface-strong: #1e2130;
+    --mc-text: #e8eaf0;
+    --mc-text-muted: #a0a8b8;
+    --mc-text-subtle: #8a94a8;
+    --mc-heading: #a8bce8;
+    --mc-border: #4a6fa5;
+    --mc-border-soft: #2e3550;
+    --mc-focus: #ffbf47;
     --mc-danger: #ef5350;
-    --mc-danger-dark: #e53935;
-    --mc-secondary: #6b7280;
-    --mc-secondary-dark: #4b5563;
-    --mc-shadow: rgba(15, 23, 42, 0.45);
+    --mc-danger-dark: #c62828;
+    --mc-secondary: #9e9e9e;
+    --mc-secondary-dark: #888888;
+    --mc-shadow: rgba(107, 147, 224, 0.22);
+    --mc-on-accent: #1e2130;
+    --mc-study-bg: rgba(107, 147, 224, 0.20);
+    --mc-kids-bg: rgba(255, 183, 77, 0.25);
+    --mc-women-bg: rgba(186, 104, 200, 0.25);
+    --mc-community-bg: rgba(76, 175, 80, 0.25);
+    --mc-youth-bg: rgba(33, 150, 243, 0.25);
+    --mc-sports-bg: rgba(255, 87, 34, 0.25);
+    --mc-young-adults-bg: rgba(0, 188, 212, 0.25);
+    --mc-creative-bg: rgba(233, 30, 99, 0.22);
+    --mc-event-pill-bg: rgba(107, 147, 224, 0.18);
+    --mc-event-pill-bg-strong: rgba(107, 147, 224, 0.22);
+    --mc-focus-shadow: rgba(255, 191, 71, 0.25);
+    --mc-skip-link-bg: #f0f0f0;
     --mc-nav-icon-filter: brightness(0) invert(1);
     --mc-menu-back-filter: brightness(0) invert(1);
 }
@@ -103,7 +129,7 @@ body {
     }
 
 .top-nav-text {
-    color: var(--mc-page-bg);
+    color: #f3f4f6;
     font-size: 1rem;
     font-weight: 500;
 }
@@ -147,6 +173,7 @@ body {
         height: 30px;
         width: 30px;
         margin-bottom: 4px;
+        filter: var(--mc-nav-icon-filter);
     }
 /* _LAYOUT PAGE STYLING */
 
@@ -221,11 +248,11 @@ body {
     font-weight: 500;
     grid-column: 1 / -1;
     text-decoration: none;
-    color: white;
+    color: var(--mc-on-accent);
 }
 
     .all-sermons-btn:visited {
-        color: white;
+        color: var(--mc-on-accent);
     }
 
 .all-sermons-header {
@@ -372,7 +399,7 @@ body {
     padding: 0.75rem 1rem;
     text-align: center;
     background-color: var(--mc-primary);
-    color: white;
+    color: var(--mc-on-accent);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 500;
@@ -383,7 +410,7 @@ body {
     .sermon-info-button:hover,
     .sermon-visit-button:hover {
         background-color: var(--mc-primary-dark);
-        color: white;
+        color: var(--mc-on-accent);
         text-decoration: none;
     }
 /* SERMONS PAGE STYLING */
@@ -396,35 +423,35 @@ body {
 
 /* colored icon wrappers per event type */
 .event-icon-wrapper.study {
-    background-color: rgba(66, 103, 178, 0.12);
+    background-color: var(--mc-study-bg);
 }
 
 .event-icon-wrapper.kids {
-    background-color: rgba(255, 183, 77, 0.2);
+    background-color: var(--mc-kids-bg);
 }
 
 .event-icon-wrapper.women {
-    background-color: rgba(186, 104, 200, 0.15);
+    background-color: var(--mc-women-bg);
 }
 
 .event-icon-wrapper.community {
-    background-color: rgba(76, 175, 80, 0.15);
+    background-color: var(--mc-community-bg);
 }
 
 .event-icon-wrapper.youth {
-    background-color: rgba(33, 150, 243, 0.15);
+    background-color: var(--mc-youth-bg);
 }
 
 .event-icon-wrapper.sports {
-    background-color: rgba(255, 87, 34, 0.15);
+    background-color: var(--mc-sports-bg);
 }
 
 .event-icon-wrapper.young-adults {
-    background-color: rgba(0, 188, 212, 0.15);
+    background-color: var(--mc-young-adults-bg);
 }
 
 .event-icon-wrapper.creative {
-    background-color: rgba(233, 30, 99, 0.12);
+    background-color: var(--mc-creative-bg);
 }
 
 /* event card icons */
@@ -526,7 +553,7 @@ body {
 .event-time {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background-color: rgba(66, 103, 178, 0.1);
+    background-color: var(--mc-event-pill-bg);
     color: var(--mc-primary);
     border-radius: 12px;
     font-size: 0.75rem;
@@ -534,7 +561,7 @@ body {
 }
 
 .event-time {
-    background-color: rgba(66, 103, 178, 0.15);
+    background-color: var(--mc-event-pill-bg-strong);
 }
 
 .event-info-card p {
@@ -596,7 +623,7 @@ a.phone-number {
     transform: translateY(-50%);
     padding: 0.5rem 1rem;
     background-color: var(--mc-primary);
-    color: white;
+    color: var(--mc-on-accent);
     border-radius: 8px;
     text-decoration: none;
 }
@@ -618,7 +645,7 @@ a.phone-number {
 .map-button:visited,
 .map-button:hover,
 .map-button:active {
-    color: white;
+    color: var(--mc-on-accent);
     text-decoration: none;
 }
 
@@ -662,7 +689,7 @@ a.phone-number {
     padding: 0.75rem 1rem;
     text-align: center;
     background-color: var(--mc-primary);
-    color: white;
+    color: var(--mc-on-accent);
     text-decoration: none;
     border-radius: 5px;
     position: relative;
@@ -678,7 +705,7 @@ a.phone-number {
 .social-links-btn:visited,
 .social-links-btn:hover,
 .social-links-btn:active {
-    color: white;
+    color: var(--mc-on-accent);
     text-decoration: none;
 }
 
@@ -721,11 +748,11 @@ a.phone-number {
     font-size: 1rem;
     font-weight: 500;
     text-decoration: none;
-    color: white;
+    color: var(--mc-on-accent);
 }
 
     .create-note-btn:visited {
-        color: white;
+        color: var(--mc-on-accent);
     }
 
 .btn-icon {
@@ -903,7 +930,7 @@ a.phone-number {
 
 .delete-confirmation .btn-danger {
     background-color: var(--mc-danger);
-    color: white;
+    color: var(--mc-on-accent);
 }
 
     .delete-confirmation .btn-danger:hover {
@@ -912,7 +939,7 @@ a.phone-number {
 
 .delete-confirmation .btn-secondary {
     background-color: var(--mc-secondary);
-    color: white;
+    color: var(--mc-on-accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1100,7 +1127,9 @@ a.phone-number {
     height: 22px;
     width: 22px;
     flex-shrink: 0;
+    filter: var(--mc-nav-icon-filter);
 }
+
 
 .more-row-chevron {
     margin-left: auto;
@@ -1256,7 +1285,7 @@ a.phone-number {
     z-index: 2000;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
-    background: #111827;
+    background: var(--mc-skip-link-bg);
     color: var(--mc-surface-strong);
     text-decoration: none;
 }
@@ -1281,7 +1310,7 @@ a.phone-number {
 .create-note-btn:focus-visible,
 .more-row:focus-visible,
 .auth-back-link:focus-visible {
-    box-shadow: 0 0 0 4px rgba(255, 191, 71, 0.35);
+    box-shadow: 0 0 0 4px var(--mc-focus-shadow);
     border-radius: 0.75rem;
 }
 
