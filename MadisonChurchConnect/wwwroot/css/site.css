@@ -151,11 +151,12 @@ body {
     padding: 0.5rem;
 }
 
-    .more-icon-link img {
+    .more-icon-link .more-icon {
         height: 30px;
         width: 30px;
         margin-bottom: 4px;
-        filter: brightness(0) invert(1);
+        fill: #ffffff;
+        flex-shrink: 0;
     }
 
     .notes-icon-link img {
