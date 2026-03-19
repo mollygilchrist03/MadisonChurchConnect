@@ -98,6 +98,65 @@ html[data-theme='dark'] {
     --mc-menu-back-filter: brightness(0) invert(1);
 }
 
+    /* Dark mode form inputs */
+    html[data-theme='dark'] .form-control {
+        background-color: var(--mc-surface-strong);
+        color: var(--mc-text);
+        border-color: var(--mc-border);
+    }
+
+        html[data-theme='dark'] .form-control::placeholder {
+            color: var(--mc-text-subtle);
+        }
+
+        html[data-theme='dark'] .form-control:focus {
+            background-color: var(--mc-surface-strong);
+            color: var(--mc-text);
+            border-color: var(--mc-primary);
+        }
+
+    /* Dark mode Cancel button fix (btn-note-action with mc-secondary) */
+    html[data-theme='dark'] .btn-note-action {
+        color: var(--mc-text) !important;
+    }
+
+    html[data-theme='dark'] .sermon-watch-button,
+    html[data-theme='dark'] .sermon-visit-button,
+    html[data-theme='dark'] .all-sermons-btn,
+    html[data-theme='dark'] .btn-note-action {
+        color: #ffffff;
+    }
+
+    /* Dark mode label and section text contrast fixes */
+    html[data-theme='dark'] .more-section-label {
+        color: #a8bce8;
+    }
+
+    html[data-theme='dark'] .auth-back-link {
+        color: #a8bce8;
+    }
+
+    html[data-theme='dark'] .page-title {
+        color: #a8bce8;
+    }
+
+    /* Create New Note button - always white text */
+    html[data-theme='dark'] .create-note-btn {
+        color: #ffffff;
+    }
+
+    /* Cancel button - gray background with white text */
+    html[data-theme='dark'] .btn-note-action[style*="mc-secondary"],
+    html[data-theme='dark'] .note-actions a.btn-note-action {
+        background-color: var(--mc-secondary);
+        color: #ffffff;
+    }
+
+.btn-note-cancel {
+    background-color: var(--mc-secondary) !important;
+    color: #ffffff !important;
+}
+
 body {
     margin-bottom: 60px;
     padding-top: 80px;
@@ -779,7 +838,7 @@ a.phone-number {
     height: 20px;
     width: 20px;
     margin-right: 0.5rem;
-    filter: var(--mc-nav-icon-filter);
+    filter: brightness(0) invert(1);
 }
 
 .notes-list {
