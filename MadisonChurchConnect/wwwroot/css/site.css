@@ -1277,10 +1277,20 @@ a.phone-number {
 
 .more-row:link,
 .more-row:visited,
-.more-row:hover,
 .more-row:active {
     color: var(--mc-text);
     text-decoration: none;
+}
+
+.more-row:not(.more-row-static):active,
+.more-row-btn:active {
+    background-color: var(--mc-primary-soft);
+}
+
+.more-row:not(.more-row-static):hover {
+    color: var(--mc-text);
+    text-decoration: none;
+    background-color: var(--mc-primary-soft);
 }
 
 .icon-flip {
