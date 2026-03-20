@@ -190,6 +190,13 @@ html[data-theme='dark'] {
             color: #ffffff;
         }
 
+    /* Prevent iOS auto-zoom on input focus */
+    html[data-theme='dark'] .form-control,
+    html[data-theme='light'] .form-control,
+    .form-control {
+        font-size: 1rem;
+    }
+
 .btn-note-cancel {
     background-color: var(--mc-secondary) !important;
     color: #ffffff !important;
@@ -1346,6 +1353,7 @@ a.phone-number {
 
 .auth-page-centered {
     min-height: calc(100vh - 2rem);
+    overflow: hidden;
 }
 
 .auth-back-link {
@@ -1381,10 +1389,18 @@ a.phone-number {
     padding-bottom: 4rem;
 }
 
+.page-shell-fixed {
+    overflow: hidden;
+    height: 100vh;
+    padding-bottom: 0;
+}
+
 .menu-layout-body {
     padding: 0;
     margin: 0;
     background-color: var(--mc-page-bg);
+    overflow: hidden;
+    height: 100vh;
 }
 
 .skip-link {
