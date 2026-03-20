@@ -22,7 +22,7 @@ namespace MadisonChurchConnect.Services.Util
             string salt, hashedPassword;
 
             // generate a salt to ensure unique password hashes
-            salt = BCrypt.Net.BCrypt.GenerateSalt();
+            salt = BCrypt.Net.BCrypt.GenerateSalt(10);
 
             // hash the password using the generated salt
             hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainTextPassword, salt);
