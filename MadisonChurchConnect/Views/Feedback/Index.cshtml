@@ -8,11 +8,11 @@
     ViewData["Title"] = "Feedback";
     Layout = "_MenuLayout";
 }
-<div class="auth-page">
+<div class="auth-page auth-page-centered">
     <div class="note-card">
         <div id="feedback-form-area">
             <h1 class="page-title">Send Feedback</h1>
-            <p style="color: #555; font-size: 0.9rem; margin-bottom: 1.25rem;">
+            <p style="color: var(--mc-text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
                 Have a suggestion or found something wrong? Let us know!
             </p>
             <div id="feedback-error" class="text-danger mb-3" role="alert" hidden></div>
@@ -35,7 +35,7 @@
         <div id="feedback-confirmation" style="display: none; text-align: center; padding: 1.5rem 0;" role="status" aria-live="polite">
             <p style="font-size: 1.5rem; margin-bottom: 0.5rem;" aria-hidden="true">✓</p>
             <h2 style="color: var(--mc-primary); margin-bottom: 0.5rem;">Thanks for your feedback!</h2>
-            <p style="color: #555; font-size: 0.9rem;">
+            <p style="color: var(--mc-text-muted); font-size: 0.9rem;">
                 Your message has been sent successfully.
             </p>
         </div>

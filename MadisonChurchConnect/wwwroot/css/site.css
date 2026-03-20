@@ -1275,6 +1275,14 @@ a.phone-number {
     margin: 0 1rem;
 }
 
+.more-row:link,
+.more-row:visited,
+.more-row:hover,
+.more-row:active {
+    color: var(--mc-text);
+    text-decoration: none;
+}
+
 .icon-flip {
     transform: scaleX(-1);
 }
