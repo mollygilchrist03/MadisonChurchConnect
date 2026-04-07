@@ -1,6 +1,5 @@
-const CACHE_NAME = 'madison-connect-v4';
+﻿const CACHE_NAME = 'madison-connect-v5';
 const APP_SHELL = [
-    '/',
     '/manifest.json',
     '/css/site.css',
     '/js/site.js',
@@ -8,6 +7,7 @@ const APP_SHELL = [
     '/images/apple-touch-icon.png'
 ];
 const CACHE_EXCLUDED = [
+    '/',
     '/Menu',
     '/Login',
     '/Logout',
@@ -35,7 +35,10 @@ self.addEventListener('fetch', (event) => {
         return;
     }
     const url = new URL(event.request.url);
-    if (CACHE_EXCLUDED.some((path) => url.pathname.startsWith(path))) {
+    // ↓ replaced line is here
+    if (CACHE_EXCLUDED.some((path) =>
+        path === '/' ? url.pathname === '/' : url.pathname.startsWith(path)
+    )) {
         event.respondWith(fetch(event.request));
         return;
     }
