@@ -11,8 +11,8 @@
     Layout = "_MenuLayout";
 }
 
-<div class="notes-page" style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-    <div class="container" style="max-width: 550px; margin: 0 auto; padding: 15px; display: flex; flex-direction: column; height: 100%;">
+<div class="notes-page notes-page-shell">
+    <div class="container notes-container-shell">
 
         @* --- Fixed Header Section --- *@
         <h2 class="page-title text-center">My Sermon Notes</h2>
@@ -26,7 +26,7 @@
         @* ---------------------------- *@
 
         @* --- Scrollable List Section --- *@
-        <div class="notes-list" style="flex: 1; overflow-y: auto; padding-right: 5px; -webkit-overflow-scrolling: touch;">
+        <div class="notes-list notes-list-scrollable">
             @if (Model != null && Model.Any())
             {
                 foreach (var note in Model)
@@ -52,10 +52,10 @@
             }
             else
             {
-                <div class="note-card empty-state shadow-sm" style="border-style: dashed; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
-                    <img src="~/images/file-regular-full.svg" alt="No notes" class="empty-icon" style="width: 50px; margin-bottom: 15px; opacity: 0.5;" />
-                    <h5 style="margin-bottom: 10px;">No notes found</h5>
-                    <p style="margin: 0;">Tap the button above to start your first sermon note!</p>
+                <div class="note-card empty-state empty-state-card shadow-sm">
+                    <img src="~/images/file-regular-full.svg" alt="No notes" class="empty-icon empty-state-icon" />
+                    <h5 class="empty-state-title">No notes found</h5>
+                    <p class="empty-state-message">Tap the button above to start your first sermon note!</p>
                 </div>
             }
         </div>

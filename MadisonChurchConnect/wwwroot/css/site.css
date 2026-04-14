@@ -852,6 +852,22 @@ a.phone-number {
     padding: 1rem 0;
 }
 
+.notes-page-shell {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.notes-container-shell {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .page-title {
     margin-bottom: 1.5rem;
     color: var(--mc-primary);
@@ -892,6 +908,13 @@ a.phone-number {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.notes-list-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .note-card-wrapper {
@@ -980,11 +1003,67 @@ a.phone-number {
     color: var(--mc-text-subtle);
 }
 
+.empty-state-card {
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
 .empty-icon {
     height: 80px;
     width: 80px;
     margin-bottom: 1rem;
     opacity: 0.5;
+}
+
+.empty-state-icon {
+    width: 50px;
+    margin-bottom: 15px;
+    filter: var(--mc-nav-icon-filter);
+}
+
+.empty-state-title {
+    margin-bottom: 10px;
+    color: var(--mc-text);
+}
+
+.empty-state-message {
+    margin: 0;
+    color: var(--mc-text-subtle);
+}
+
+.note-delete-title {
+    color: var(--mc-danger);
+}
+
+.note-delete-preview {
+    background-color: var(--mc-event-pill-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.note-delete-date {
+    color: var(--mc-text-subtle);
+}
+
+.note-delete-content {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--mc-text-muted);
+    margin-bottom: 0;
+}
+
+.note-delete-button {
+    background-color: var(--mc-danger);
+}
+
+.note-delete-button:hover {
+    background-color: var(--mc-danger-dark);
 }
 
 /* delete confirmation page */
